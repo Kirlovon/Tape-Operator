@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         KinoPoisk Watch
+// @name         Kinopoisk Watch
 // @namespace    kinopoisk-watch
 // @version      0.2
 // @description  Watch films on Kinopoisk.ru for free!
@@ -33,7 +33,7 @@ function openPlayer() {
     // Get id of the film
     const url = window.location.href;
     const id = url.split('/')[4];
-    const watchPage = `https://watchfilm.surge.sh/#${id}`;
+    const watchPage = `https://kirlovon.github.io/Kinopoisk-Watch/#/${id}`;
 
     // Create film overlay
     const overlay = document.createElement('div');
@@ -65,6 +65,7 @@ function openPlayer() {
     // Create Powered By link
     const poweredBy = document.createElement('a');
     poweredBy.setAttribute('href', 'https://yohoho.cc/');
+    poweredBy.setAttribute('target', '_blank');
     poweredBy.style.position = 'fixed';
     poweredBy.style.cursor = 'pointer';
     poweredBy.style.fontSize = '12px';
