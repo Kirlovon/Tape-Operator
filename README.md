@@ -4,7 +4,7 @@
 ## Установка
 1. Установите расширение [Tampermonkey](https://www.tampermonkey.net/).
 2. Перезапустите браузер. ( Не обязательно, но лучше перезапустить )
-3. Установите скрипт ( Для автоматической установки можно перейти по [этой ссылке](https://github.com/Kirlovon/Kinopoisk-Watch/edit/master/kinopoisk-watch.user.js) ).
+3. Установите скрипт ( Для автоматической установки можно перейти по [этой ссылке](https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/kinopoisk-watch.user.js) ).
 
 ## Информация
 Скрипт работает на основе плеера [Yohoho.cc](https://yohoho.cc/)! Скрипт предоставляется исключительно в ознакомительных целях! Пиратство - грех!
