@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         Kinopoisk Watch
 // @namespace    kinopoisk-watch
-// @version      0.5
+// @version      0.6
 // @description  Watch films on Kinopoisk.ru for free!
 // @author       Kirlovon
 // @match        *://www.kinopoisk.ru/*/*
 // @grant        none
 // ==/UserScript==
 
-// Button image
-const image = `
+// Image of the banner
+const bannerImage = `
 <svg width="100%" height="100%" viewBox="0 0 128 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
     <path id="Banner" d="M128,0L0,0L0,512L64,480L128,512L128,0Z" style="fill:url(#_Linear1);"/>
     <g id="icon" transform="matrix(1,0,0,1,-64,0)">
@@ -27,32 +27,32 @@ const splitted = url.split('/');
 const id = splitted[4];
 const type = splitted[3];
 
-// Show button
+// Show banner
 if (type === 'film' || type === 'series') {
 
-    // Create watch button
-    const watchButton = document.createElement('div');
-    watchButton.innerHTML = image;
-    watchButton.style.width = '32px';
-    watchButton.style.height = '128px';
-    watchButton.style.top = '-128px';
-    watchButton.style.left = '8px';
-    watchButton.style.outline = 'none';
-    watchButton.style.cursor = 'pointer';
-    watchButton.style.position = 'fixed';
-    watchButton.style.zIndex = '9999999999';
-    watchButton.style.transition = 'top 0.2s';
+    // Create banner element
+    const banner = document.createElement('div');
+    banner.innerHTML = bannerImage;
+    banner.style.width = '32px';
+    banner.style.height = '128px';
+    banner.style.top = '-128px';
+    banner.style.left = '8px';
+    banner.style.outline = 'none';
+    banner.style.cursor = 'pointer';
+    banner.style.position = 'fixed';
+    banner.style.zIndex = '9999999999';
+    banner.style.transition = 'top 0.2s ease';
 
-    // Show button after timeout
+    // Show banner after timeout
     setTimeout(() => {
-        watchButton.style.top = '-32px';
-        watchButton.onclick = openPlayer;
-        watchButton.onmouseover = () => {watchButton.style.top = '0px'};
-        watchButton.onmouseout = () => {watchButton.style.top = '-32px'};
+        banner.style.top = '-32px';
+        banner.onclick = openPlayer;
+        banner.onmouseover = () => {banner.style.top = '0px'};
+        banner.onmouseout = () => {banner.style.top = '-32px'};
     }, 1000);
 
-    // Add button to the page
-    document.body.appendChild(watchButton);
+    // Add banner to the page
+    document.body.appendChild(banner);
 }
 
 // Open page with film player
