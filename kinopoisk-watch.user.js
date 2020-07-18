@@ -1,87 +1,63 @@
 // ==UserScript==
 // @name         Kinopoisk Watch
 // @namespace    kinopoisk-watch
-// @version      0.2
+// @version      0.5
 // @description  Watch films on Kinopoisk.ru for free!
 // @author       Kirlovon
-// @match        *://www.kinopoisk.ru/film/*
+// @match        *://www.kinopoisk.ru/*/*
 // @grant        none
 // ==/UserScript==
 
-// Show button when page loaded
-showButton();
+// Button image
+const image = `
+<svg width="100%" height="100%" viewBox="0 0 128 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <path id="Banner" d="M128,0L0,0L0,512L64,480L128,512L128,0Z" style="fill:url(#_Linear1);"/>
+    <g id="icon" transform="matrix(1,0,0,1,-64,0)">
+        <path d="M168,382C168,360.057 149.943,342 128,342C106.057,342 88,360.057 88,382C88,403.943 106.057,422 128,422L165,422L168,410L162,410L160,414L152,414C162.065,406.452 168,394.581 168,382ZM96,382C96,364.445 110.445,350 128,350C145.555,350 160,364.445 160,382C160,399.555 145.555,414 128,414C110.445,414 96,399.555 96,382ZM128,393C132.415,393 136,396.585 136,401C136,405.415 132.415,409 128,409C123.585,409 120,405.415 120,401C120,396.585 123.585,393 128,393ZM144,383C148.415,383 152,386.585 152,391C152,395.415 148.415,399 144,399C139.585,399 136,395.415 136,391C136,386.585 139.585,383 144,383ZM112,383C116.415,383 120,386.585 120,391C120,395.415 116.415,399 112,399C107.585,399 104,395.415 104,391C104,386.585 107.585,383 112,383ZM144,365C148.415,365 152,368.585 152,373C152,377.415 148.415,381 144,381C139.585,381 136,377.415 136,373C136,368.585 139.585,365 144,365ZM112,365C116.415,365 120,368.585 120,373C120,377.415 116.415,381 112,381C107.585,381 104,377.415 104,373C104,368.585 107.585,365 112,365ZM128,355C132.415,355 136,358.585 136,363C136,367.415 132.415,371 128,371C123.585,371 120,367.415 120,363C120,358.585 123.585,355 128,355Z" style="fill:rgb(235,255,255);fill-rule:nonzero;"/>
+    </g>
+    <defs>
+        <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(128,512,-2048,512,0,0)"><stop offset="0" style="stop-color:rgb(248,12,101);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(247,88,27);stop-opacity:1"/></linearGradient>
+    </defs>
+</svg>
+`;
 
-// Show watch button
-function showButton() {
+// Get id from url
+const url = window.location.href;
+const splitted = url.split('/');
+const id = splitted[4];
+const type = splitted[3];
+
+// Show button
+if (type === 'film' || type === 'series') {
 
     // Create watch button
-    const watchButton = document.createElement('button');
-    watchButton.innerText = 'Смотреть';
-    watchButton.className = 'movie-button movie-trailer-button';
-    watchButton.style.color = 'white';
-    watchButton.style.background = 'linear-gradient(45deg, #FF0055, #FF5500)';
-    watchButton.onclick = openPlayer;
+    const watchButton = document.createElement('div');
+    watchButton.innerHTML = image;
+    watchButton.style.width = '32px';
+    watchButton.style.height = '128px';
+    watchButton.style.top = '-128px';
+    watchButton.style.left = '8px';
+    watchButton.style.outline = 'none';
+    watchButton.style.cursor = 'pointer';
+    watchButton.style.position = 'fixed';
+    watchButton.style.zIndex = '9999999999';
+    watchButton.style.transition = 'top 0.2s';
+
+    // Show button after timeout
+    setTimeout(() => {
+        watchButton.style.top = '-32px';
+        watchButton.onclick = openPlayer;
+        watchButton.onmouseover = () => {watchButton.style.top = '0px'};
+        watchButton.onmouseout = () => {watchButton.style.top = '-32px'};
+    }, 1000);
 
     // Add button to the page
-    const buttonsContainer = document.getElementsByClassName('movie-buttons-container')[0];
-    buttonsContainer.prepend(watchButton);
+    document.body.appendChild(watchButton);
 }
 
 // Open page with film player
 function openPlayer() {
-
-    // Get id of the film
-    const url = window.location.href;
-    const id = url.split('/')[4];
     const watchPage = `https://kirlovon.github.io/Kinopoisk-Watch/#/${id}`;
-
-    // Create film overlay
-    const overlay = document.createElement('div');
-    overlay.id = 'kinopoisk-watch-overlay';
-    overlay.className = 'discovery-trailers-overlay';
-
-    // Create iframe
-    const iframe = document.createElement('iframe');
-    iframe.setAttribute('src', watchPage);
-    iframe.setAttribute('allowfullscreen', true);
-    iframe.setAttribute('name', 'KinoPoisk Watch');
-    iframe.style.position = 'fixed';
-    iframe.style.display = 'block';
-    iframe.style.border = 'none';
-    iframe.style.top = '50%';
-    iframe.style.left = '50%';
-    iframe.style.borderRadius = '4px';
-    iframe.style.backgroundColor = 'black';
-    iframe.style.boxShadow = '0px 8px 32px rgba(0, 0, 0, 0.5)';
-    iframe.style.width = 'calc(90% - 64px)';
-    iframe.style.height = 'calc(90% - 64px)';
-    iframe.style.transform = 'translate(-50%, -50%)';
-
-    // Create close button
-    const close = document.createElement('button');
-    close.className = 'discovery-trailers-closer';
-    close.onclick = closePlayer;
-
-    // Create Powered By link
-    const poweredBy = document.createElement('a');
-    poweredBy.setAttribute('href', 'https://yohoho.cc/');
-    poweredBy.setAttribute('target', '_blank');
-    poweredBy.style.position = 'fixed';
-    poweredBy.style.cursor = 'pointer';
-    poweredBy.style.fontSize = '12px';
-    poweredBy.style.color = 'white';
-    poweredBy.style.bottom = '16px';
-    poweredBy.style.left = '16px';
-    poweredBy.innerHTML = 'Powered by Yohoho';
-
-    // Add overlay to body
-    overlay.appendChild(close);
-    overlay.appendChild(iframe);
-    overlay.appendChild(poweredBy);
-    document.body.appendChild(overlay);
-}
-
-// Close player
-function closePlayer() {
-    document.getElementById('kinopoisk-watch-overlay').remove();
+    const filmTab = window.open(watchPage, '_blank');
+    filmTab.focus();
 }
