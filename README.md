@@ -1,7 +1,7 @@
 ![Image](https://raw.githubusercontent.com/Kirlovon/Kinopoisk-Watch/master/image.png)
 
 # Kinopoisk Watch
-Скрипт, превращающий [Kinopoisk.ru](https://www.kinopoisk.ru/) в онлайн - кинотеатр! На каждой странице с фильмом появляется кнопка *«Смотреть»*, нажав на которую, откроется плеер с фильмом. 
+Скрипт, превращающий [Kinopoisk.ru](https://www.kinopoisk.ru/) в онлайн - кинотеатр! На каждой странице с фильмом или сериалом, в левом верхнем углу появляется флажок, нажав на который, откроется плеер с фильмом. 
  
 ## Установка
 1. Установите расширение [Tampermonkey](https://www.tampermonkey.net/).
