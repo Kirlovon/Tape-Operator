@@ -15,4 +15,4 @@
 Скрипт работает на основе плеера [Yohoho.cc](https://yohoho.cc/), и предоставляется исключительно в ознакомительных целях! 
 ***Пиратство - плохо!***
 
-MIT _([LICENSE](https://github.com/Kirlovon/Kinopoisk-Watch/blob/master/LICENSE) файле)_
+MIT _([LICENSE](https://github.com/Kirlovon/Kinopoisk-Watch/blob/master/LICENSE) файл)_
