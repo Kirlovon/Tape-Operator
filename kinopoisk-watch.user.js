@@ -1,12 +1,15 @@
 // ==UserScript==
 // @name         Kinopoisk Watch
 // @namespace    kinopoisk-watch
-// @version      0.6
+// @version      0.9
 // @description  Watch films on Kinopoisk.ru for free!
 // @author       Kirlovon
 // @match        *://www.kinopoisk.ru/*/*
 // @grant        none
 // ==/UserScript==
+
+// Link to the viewer page
+const kinopoiskWatchLink = 'https://kirlovon.github.io/Kinopoisk-Watch';
 
 // Image of the banner
 const bannerImage = `
@@ -21,17 +24,36 @@ const bannerImage = `
 </svg>
 `;
 
-// Get id from url
-const url = window.location.href;
-const splitted = url.split('/');
-const id = splitted[4];
-const type = splitted[3];
+/**
+ * Get id, type & title of current movie.
+ */
+function getMovieData() {
+    const url = window.location.href;
+    const splitted = url.split('/');
+    const id = splitted[4];
+    const type = splitted[3];
+    const title = document.querySelector('meta[property="og:title"]')?.content;
 
-// Show banner
-if (type === 'film' || type === 'series') {
+    return { id, type, title };
+}
 
-    // Create banner element
+/**
+ * Open page with Kinopoisk Watch player.
+ */
+function openPlayer(id, title) {
+    const link = new URL(kinopoiskWatchLink);
+    if (id) link.searchParams.set('id', id);
+    if (title) link.searchParams.set('title', title);
+
+    window.open(link.toString(), '_blank').focus();
+}
+
+/**
+ * Mount Kinopoisk Watch banner to the page.
+ */
+function mountBanner(id, title) {
     const banner = document.createElement('div');
+    banner.id = 'kinopoisk-watch';
     banner.innerHTML = bannerImage;
     banner.style.width = '32px';
     banner.style.height = '128px';
@@ -43,21 +65,23 @@ if (type === 'film' || type === 'series') {
     banner.style.zIndex = '9999999999';
     banner.style.transition = 'top 0.2s ease';
 
-    // Show banner after timeout
     setTimeout(() => {
         banner.style.top = '-32px';
-        banner.onclick = openPlayer;
-        banner.onmouseover = () => {banner.style.top = '0px'};
-        banner.onmouseout = () => {banner.style.top = '-32px'};
-    }, 1000);
+        banner.addEventListener('click', () => openPlayer(id, title));
+        banner.addEventListener('mouseover', () => { banner.style.top = '0px' });
+        banner.addEventListener('mouseout', () => { banner.style.top = '-32px' });
+    }, 100);
 
-    // Add banner to the page
     document.body.appendChild(banner);
 }
 
-// Open page with film player
-function openPlayer() {
-    const watchPage = `https://kirlovon.github.io/Kinopoisk-Watch/#/${id}`;
-    const filmTab = window.open(watchPage, '_blank');
-    filmTab.focus();
+/**
+ * Initialize script
+ */
+function init() {
+    const { id, type, title } = getMovieData();
+    if (type === 'film' || type === 'series') mountBanner(id, title);
 }
+
+// Init on load
+window.addEventListener('load', init);
