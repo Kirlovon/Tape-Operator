@@ -6,8 +6,7 @@
 
 ## Установка
 1. Установите расширение [Tampermonkey](https://www.tampermonkey.net/).
-2. Перезапустите браузер. (Не обязательно, но лучше перезапустить)
-3. Установите скрипт. (Для автоматической установки можно перейти по [этой ссылке](https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/kinopoisk-watch.user.js))
+2. Установите скрипт. _(Для автоматической установки можно перейти по [этой ссылке](https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/kinopoisk-watch.user.js))_
 
 <br>
 
