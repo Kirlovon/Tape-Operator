@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Kinopoisk Watch
 // @namespace    kinopoisk-watch
-// @version      0.9
+// @version      1.0
 // @description  Watch films on Kinopoisk.ru for free!
 // @author       Kirlovon
 // @match        *://www.kinopoisk.ru/*/*
@@ -25,33 +25,31 @@ const bannerImage = `
 `;
 
 /**
- * Get id, type & title of current movie.
+ * Get id & type of current movie.
  */
 function getMovieData() {
     const url = window.location.href;
     const splitted = url.split('/');
     const id = splitted[4];
     const type = splitted[3];
-    const title = document.querySelector('meta[property="og:title"]')?.content;
 
-    return { id, type, title };
+    return { id, type };
 }
 
 /**
  * Open page with Kinopoisk Watch player.
  */
-function openPlayer(id, title) {
+function openPlayer(id) {
     const link = new URL(kinopoiskWatchLink);
     if (id) link.searchParams.set('id', id);
-    if (title) link.searchParams.set('title', title);
-
+    
     window.open(link.toString(), '_blank').focus();
 }
 
 /**
  * Mount Kinopoisk Watch banner to the page.
  */
-function mountBanner(id, title) {
+function mountBanner(id) {
     const banner = document.createElement('div');
     banner.id = 'kinopoisk-watch';
     banner.innerHTML = bannerImage;
@@ -67,7 +65,7 @@ function mountBanner(id, title) {
 
     setTimeout(() => {
         banner.style.top = '-32px';
-        banner.addEventListener('click', () => openPlayer(id, title));
+        banner.addEventListener('click', () => openPlayer(id));
         banner.addEventListener('mouseover', () => { banner.style.top = '0px' });
         banner.addEventListener('mouseout', () => { banner.style.top = '-32px' });
     }, 100);
@@ -79,8 +77,8 @@ function mountBanner(id, title) {
  * Initialize script
  */
 function init() {
-    const { id, type, title } = getMovieData();
-    if (type === 'film' || type === 'series') mountBanner(id, title);
+    const { id, type } = getMovieData();
+    if (type === 'film' || type === 'series') mountBanner(id);
 }
 
 // Init on load
