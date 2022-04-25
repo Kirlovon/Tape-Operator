@@ -8,8 +8,9 @@
 // @grant        none
 // ==/UserScript==
 
-// Link to the viewer page
 const kinopoiskWatchLink = 'https://kirlovon.github.io/Kinopoisk-Watch';
+const bannerId = 'kinopoisk-watch';
+const movieTypes = ['film', 'series'];
 
 // Image of the banner
 const bannerImage = `
@@ -24,34 +25,15 @@ const bannerImage = `
 </svg>
 `;
 
-/**
- * Get id & type of current movie.
- */
-function getMovieData() {
-    const url = window.location.href;
-    const splitted = url.split('/');
-    const id = splitted[4];
-    const type = splitted[3];
-
-    return { id, type };
-}
-
-/**
- * Open page with Kinopoisk Watch player.
- */
-function openPlayer(id) {
+function openMoviePlayerPage(movieId) {
     const link = new URL(kinopoiskWatchLink);
-    if (id) link.searchParams.set('id', id);
-    
+    link.searchParams.set('id', movieId);
     window.open(link.toString(), '_blank').focus();
 }
 
-/**
- * Mount Kinopoisk Watch banner to the page.
- */
-function mountBanner(id) {
+function mountBanner(movieId) {
     const banner = document.createElement('div');
-    banner.id = 'kinopoisk-watch';
+    banner.id = bannerId;
     banner.innerHTML = bannerImage;
     banner.style.width = '32px';
     banner.style.height = '128px';
@@ -65,7 +47,7 @@ function mountBanner(id) {
 
     setTimeout(() => {
         banner.style.top = '-32px';
-        banner.addEventListener('click', () => openPlayer(id));
+        banner.addEventListener('click', () => openMoviePlayerPage(movieId));
         banner.addEventListener('mouseover', () => { banner.style.top = '0px' });
         banner.addEventListener('mouseout', () => { banner.style.top = '-32px' });
     }, 100);
@@ -73,13 +55,44 @@ function mountBanner(id) {
     document.body.appendChild(banner);
 }
 
+function removeBanner() {
+    if (document.contains(document.getElementById(bannerId))) {
+        document.getElementById(bannerId).remove();
+    }
+}
+
 /**
  * Initialize script
  */
 function init() {
-    const { id, type } = getMovieData();
-    if (type === 'film' || type === 'series') mountBanner(id);
+    const url = window.location.href;
+    const urlData = url.split('/');
+    const movieId = urlData[4];
+    const movieType = urlData[3];
+
+    if (typeof movieId === 'undefined' || typeof movieType === 'undefined') {
+        console.error('Kinopoisk Watch movie data incorrect');
+        removeBanner();
+
+        return;
+    }
+
+    if (movieTypes.includes(movieType)) {
+        mountBanner(movieId);
+    } else {
+        removeBanner();
+    }
 }
+
+// Init on change url without refresh
+let lastUrl = location.href;
+new MutationObserver(() => {
+    const url = location.href;
+    if (url !== lastUrl) {
+        lastUrl = url;
+        init();
+    }
+}).observe(document, {subtree: true, childList: true});
 
 // Init on load
 window.addEventListener('load', init);
