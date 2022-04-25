@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Kinopoisk Watch
 // @namespace    kinopoisk-watch
-// @version      1.0
+// @version      1.1
 // @description  Watch films on Kinopoisk.ru for free!
 // @author       Kirlovon
 // @match        *://www.kinopoisk.ru/*/*
