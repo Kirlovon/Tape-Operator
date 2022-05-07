@@ -4,7 +4,7 @@
 // @author		Kirlovon
 // @description Watch films on Kinopoisk.ru for free!
 // @icon		https://raw.githubusercontent.com/Kirlovon/Kinopoisk-Watch/gh-pages/assets/favicon.png
-// @version		1.2
+// @version		1.2.1
 // @match		*://www.kinopoisk.ru/*
 // @grant		none
 // @run-at		document-end
@@ -25,7 +25,7 @@ const BANNER_IMAGE = `
 
 const BANNER_ID = 'kinopoisk-watch';
 const MOVIE_TYPES = ['film', 'series'];
-const PLAYER_LINK = 'https://kirlovon.github.io/Kinopoisk-Watch';
+const PLAYER_LINK = 'https://kirlovon.dev/Kinopoisk-Watch/';
 
 let currentMovieId = null;
 let lastUrl = '/';
