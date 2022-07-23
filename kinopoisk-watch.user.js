@@ -4,7 +4,7 @@
 // @author		Kirlovon
 // @description Watch films on Kinopoisk.ru for free!
 // @icon		https://raw.githubusercontent.com/Kirlovon/Kinopoisk-Watch/gh-pages/assets/favicon.png
-// @version		1.2.1
+// @version		1.3.0
 // @match		*://www.kinopoisk.ru/*
 // @grant		none
 // @run-at		document-end
@@ -25,26 +25,16 @@ const BANNER_IMAGE = `
 
 const BANNER_ID = 'kinopoisk-watch';
 const MOVIE_TYPES = ['film', 'series'];
-const PLAYER_LINK = 'https://kirlovon.dev/Kinopoisk-Watch/';
+const PLAYER_LINK = 'https://kinopoisk-watch.org/player/';
 
-let currentMovieId = null;
 let lastUrl = '/';
-
-/**
- * Open Kinopoisk Watch player in the new tab
- */
-function openPlayer() {
-	if (!currentMovieId) return;
-	const link = new URL(PLAYER_LINK);
-	link.searchParams.set('id', currentMovieId);
-	window.open(link.toString(), '_blank').focus();
-}
 
 /**
  * Add banner element to the page
  */
 function mountBanner() {
-	const banner = document.createElement('div');
+	const banner = document.createElement('a');
+	banner.target = '_blank';
 	banner.id = BANNER_ID;
 	banner.innerHTML = BANNER_IMAGE;
 	banner.style.width = '32px';
@@ -58,7 +48,6 @@ function mountBanner() {
 	banner.style.transition = 'top 0.2s ease';
 
 	// Events
-	banner.addEventListener('click', () => openPlayer());
 	banner.addEventListener('mouseover', () => { banner.style.top = '-16px' });
 	banner.addEventListener('mouseout', () => { banner.style.top = '-32px' });
 
@@ -91,14 +80,16 @@ function updateBanner() {
 	const movieId = urlData[4];
 	const movieType = urlData[3];
 
+	// Unmount if link is invalid
 	if (!movieId || !movieType || !MOVIE_TYPES.includes(movieType)) {
 		if (banner) unmountBanner();
-		currentMovieId = null;
 	} else {
 		if (!banner) mountBanner();
-		currentMovieId = movieId;
-	}
 
+		const link = new URL(PLAYER_LINK);
+		link.searchParams.set('id', movieId);
+		document.getElementById(BANNER_ID).setAttribute('href', link.toString());
+	}
 }
 
 /**
@@ -109,7 +100,7 @@ function init() {
 	// Listen for the Url changes
 	const observer = new MutationObserver(() => updateBanner());
 	observer.observe(document, { subtree: true, childList: true });
-	
+
 	// Initialize
 	updateBanner();
 	console.log('Kinopoisk Watch started! 🎥');
