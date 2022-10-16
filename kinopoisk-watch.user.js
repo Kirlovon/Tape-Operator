@@ -4,7 +4,7 @@
 // @author		Kirlovon
 // @description Watch films on Kinopoisk.ru for free!
 // @icon		https://raw.githubusercontent.com/Kirlovon/Kinopoisk-Watch/gh-pages/assets/favicon.png
-// @version		1.3.0
+// @version		1.4.0
 // @match		*://www.kinopoisk.ru/*
 // @grant		none
 // @run-at		document-end
