@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="/favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kinopoisk Watch</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+	<a id="logo" href="https://github.com/Kirlovon/Kinopoisk-Watch" target="_blank">
+		<img src="./logo.svg" alt="Logo">
+	</a>
+
+	<div id="container">
+		<div id="yohoho" data-resize="1" data-bg="#000000" data-loading="./loading.webp"></div>
+	</div>
+
+	<span id="info">
+		Made with ♥ by <a href="https://github.com/Kirlovon" target="_blank">Kirlovon</a>.
+		Powered by <a href="https://yohoho.cc/" target="_blank">Yohoho</a>.
+	</span>
+
+	<script>
+		const container = document.getElementById('container');
+		const yohoho = document.getElementById('yohoho');
+		let isLoaded = false;
+
+		// Display text message
+		function setMessage(text) {
+			const messageElement = document.createElement('p');
+			messageElement.innerText = text;
+			container.innerHTML = '';
+			container.appendChild(messageElement);
+		}
+
+		// Initialize player
+		function init() {
+			const params = new URLSearchParams(window.location.search);
+			let id = params.get('id') || window.location.hash.replace(/\D/g, '');
+
+			if (id) {
+				yohoho.setAttribute('data-kinopoisk', id);
+			} else {
+				setMessage('ID фильма не указаны!');
+			}
+		}
+
+		// Listen for loading events
+		document.addEventListener('DOMContentLoaded', () => {
+			window.addEventListener('message', (event) => {
+				if (!event || !event.data) return;
+				if (event.data.event === 'playerReady') isLoaded = true;
+				if (event.data.quality || event.data.translate) isLoaded = true;
+			});
+
+			window.addEventListener('load', () => {
+				setTimeout(() => {
+					if (!isLoaded) {
+						const scriptAttached = !!(document.getElementById('yohoho-iframe') || document.getElementById('yohoho-loading'));
+						setMessage(scriptAttached ? 'Не удалось загрузить фильм!' : 'Не удалось загрузить плеер!');
+					}
+				}, 3000);
+			});
+		});
+
+		init();
+	</script>
+
+	<script src="//yohoho.cc/yo.js"></script>
+</body>
+
+</html>

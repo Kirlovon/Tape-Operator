@@ -1,0 +1,156 @@
+:root {
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    opacity: 1;
+    width: 100%;
+    height: auto;
+    color: white;
+    overflow-x: hidden;
+    background-color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+    background-image: radial-gradient(#383838 1px, transparent 0);
+	background-position: -20px -20px;
+  	background-size: 32px 32px;
+}
+
+a {
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+    text-underline-offset: 4px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    padding-bottom: 1rem;
+}
+
+ol {
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+body.hidden {
+    opacity: 0;
+    transform: scaleX(1.1);
+}
+
+.container {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    padding: 0 2rem;
+}
+
+.instalation {
+    padding: 1.5rem;
+    margin: 4rem 0;
+    background-color: black;
+    border: 1px solid #212121;
+    border-radius: 8px;
+}
+
+.instalation a {
+    color: #ff4177;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.question {
+    margin-bottom: 2rem;
+}
+
+.question p {
+    opacity: 0.5;
+}
+
+.title-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    margin: 0 auto;
+    margin-bottom: 32px;
+    user-select: none;
+    pointer-events: none;
+    transform: translateY(-16px);
+    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
+}
+
+.faq-title {
+    width: 100%;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #242424;
+}
+
+#github {
+    cursor: pointer;
+    opacity: 0.5;
+    padding-top: 32px;
+    padding-bottom: 16px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+#github:hover {
+    opacity: 1;
+    transition: opacity 0.2s ease;
+}
+
+#github img {
+    width: 32px;
+    height: 32px;
+    filter: invert(1);
+    margin-bottom: 16px;
+}
+
+.github-link:hover {
+    text-decoration: none;
+}
+
+.github-link:hover img {
+    filter: drop-shadow(0 0 16px red);
+}
+
+.info {
+    padding: 16px 0;
+    display: block;
+    text-align: center;
+    width: 100%;
+    color: #7e7e7e;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.info a {
+    color: white;
+}
+
+@keyframes example {
+    from {
+        opacity: 0;
+        transform: translateY(-64px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-16px);
+    }
+  }

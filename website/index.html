@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" href="/favicon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kinopoisk Watch</title>
+	<meta name="description" content="Скрипт, превращающий Kinopoisk.ru в бесплатный онлайн - кинотеатр!">
+	<meta name="author" content="Kirlovon">
+	<link rel="stylesheet" href="./style.css">
+</head>
+
+<body class="hidden">
+	<section class="container">
+		<img class="title-image" src="./title.svg" alt="Title Text">
+	</section>
+
+	<section class="container">
+		<p>
+			Данный скрипт позволяет беслатно смотреть фильмы прямо с сайта Kinopoisk! На каждой странице с фильмом или сериалом, в левом верхнем углу появляется флажок, нажав на который, откроется плеер с фильмом.
+		</p>
+	</section>
+
+	<section class="container">
+		<div class="instalation">
+			<h2>Как установить?</h2>
+			<ol>
+				<li>Установите расширение <a href="https://www.tampermonkey.net/" target="_blank">Tampermonkey</a> для своего браузера.</li>
+				<li>Установите скрипт. <i>(Для автоматической установки можно перейти <a href="https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/kinopoisk-watch.user.js">по этой ссылке</a>)</i></li>
+			</ol>
+		</div>
+	</section>
+
+	<section class="container">
+		<h2 class="faq-title">Часто задаваемые вопросы:</h2>
+		<ul>
+			<div class="question">
+				<li>
+					<h3>Почему это бесплатно?</h3>
+				</li>
+				<p>
+					Данный скрипт работает на основе плеера Yohoho, который является агрегатором ресурсов, предоставляющих фильмы.
+					Я, как разработчие данного скрипта, ни как не связан с этим плеером. Так же, я не получаю, и не планирую получать за это какие либо деньги.
+				</p>
+			</div>
+
+			<div class="question">
+				<li>
+					<h3>Как долго это будет работать?</h3>
+				</li>
+				<p>Скрипт и плеер исправно работают уже более трёх лет. Данный скрипт будет продолжать работать до тех пор пока Yohoho не перестанут потдерживать свой плеер.</p>
+			</div>
+
+			<div class="question">
+				<li>
+					<h3>Почему скрипт перестал работать?</h3>
+				</li>
+				<p>
+					Если вы заметили какую либо неисправность, то смело можете написать об этом на Github странице проекта в разделе <b>issues</b>. Обычно, плеер возобновляет свою работу в течении нескольких дней, так что подождите 2-3 дня, и только потом
+					создавайте Issue. Так же, вы можете написать мне в Telegram <i>(@Kirlovon)</i>.
+				</p>
+			</div>
+		</ul>
+	</section>
+
+	<a class="github-link" href="https://github.com/Kirlovon/Kinopoisk-Watch" target="_blank">
+		<section id="github" class="container">
+			<img src="./github-icon.svg" alt="Github Logo" />
+			<h3>Нравиться проект? Поставь ⭐ на Github!</h3>
+		</section>
+	</a>
+
+	<section class="info">
+		Made with ♥ by <a href="https://github.com/Kirlovon" target="_blank">Kirlovon</a>.
+		Powered by <a href="https://yohoho.cc/" target="_blank">Yohoho</a>.
+	</section>
+
+	<script>
+
+		// Show body
+		setTimeout(() => {
+			document.body.classList.remove('hidden');
+		}, 100);
+
+		// Redirect for legacy script versions
+		const params = new URLSearchParams(window.location.search);
+		let id = params.get('id') || window.location.hash.replace(/\D/g, '');
+
+		if (id) {
+			window.location.replace(`https://kinopoisk-watch.org/player/?id=${id}`);
+		}
+	</script>
+</body>
+
+</html>
