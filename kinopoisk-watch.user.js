@@ -25,7 +25,7 @@ const BANNER_IMAGE = `
 
 const BANNER_ID = 'kinopoisk-watch';
 const MOVIE_TYPES = ['film', 'series'];
-const PLAYER_LINK = 'https://kinopoisk-watch.org/player/';
+const PLAYER_LINK = 'https://khakilightcyanlinuxkernel.crispypiez.repl.co/player/';
 
 let lastUrl = '/';
 
