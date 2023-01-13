@@ -5,13 +5,17 @@
 <br>
 
 ## Установка
+
 1. Установите расширение [Tampermonkey](https://www.tampermonkey.net/).
 2. Установите скрипт. _(Для автоматической установки можно перейти по [этой ссылке](https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/kinopoisk-watch.user.js))_
+
+> Если вы **пользователь из России**, удалите основную версию скрипта и установите альтернативную, [нажав на эту ссылку](https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/kinopoisk-watch-alternative.user.js).
 
 <br>
 
 ## Лицензия
-Скрипт работает на основе плеера [Yohoho.cc](https://yohoho.cc/), и предоставляется исключительно в ознакомительных целях! 
-***Пиратство - плохо!***
+
+Скрипт работает на основе плеера [Yohoho.cc](https://yohoho.cc/), и предоставляется исключительно в ознакомительных целях!
+**_Пиратство - плохо!_**
 
 MIT _([LICENSE](https://github.com/Kirlovon/Kinopoisk-Watch/blob/master/LICENSE) файл)_

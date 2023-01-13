@@ -4,6 +4,8 @@
 
 * {
     box-sizing: border-box;
+    line-height: 1.5rem;
+    font-size: 1rem;
     padding: 0;
     margin: 0;
 }
@@ -21,8 +23,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     transition: opacity 0.5s ease, transform 0.3s ease;
     background-image: radial-gradient(#383838 1px, transparent 0);
-	background-position: -20px -20px;
-  	background-size: 32px 32px;
+    background-position: -20px -20px;
+    background-size: 32px 32px;
 }
 
 a {
@@ -36,7 +38,9 @@ a:hover {
     text-decoration: underline;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     padding-bottom: 1rem;
 }
 
@@ -48,6 +52,15 @@ ol {
 body.hidden {
     opacity: 0;
     transform: scaleX(1.1);
+}
+
+p {
+    text-align: justify;
+}
+
+blockquote {
+    padding: 1rem 0;
+    opacity: 1;
 }
 
 .container {
@@ -68,7 +81,8 @@ body.hidden {
     border-radius: 8px;
 }
 
-.instalation a {
+.instalation a,
+.question a {
     color: #ff4177;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
@@ -78,7 +92,8 @@ body.hidden {
 }
 
 .question p {
-    opacity: 0.5;
+    color: #5a5a5a;
+    text-align: justify;
 }
 
 .title-image {
@@ -125,10 +140,6 @@ body.hidden {
     text-decoration: none;
 }
 
-.github-link:hover img {
-    filter: drop-shadow(0 0 16px red);
-}
-
 .info {
     padding: 16px 0;
     display: block;
@@ -149,8 +160,9 @@ body.hidden {
         opacity: 0;
         transform: translateY(-64px);
     }
+
     to {
         opacity: 1;
         transform: translateY(-16px);
     }
-  }
+}

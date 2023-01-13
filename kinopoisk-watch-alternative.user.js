@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name		Kinopoisk Watch
-// @namespace	kinopoisk-watch
+// @name		Kinopoisk Watch (Alternative)
+// @namespace	kinopoisk-watch-alternative
 // @author		Kirlovon
-// @description Watch films on Kinopoisk.ru for free!
+// @description Watch films on Kinopoisk.ru for free! Alternative version of the script, with a temporary link to the player.
 // @icon		https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/website/favicon.png
 // @version		1.5.0
 // @match		*://www.kinopoisk.ru/*
@@ -25,7 +25,7 @@ const BANNER_IMAGE = `
 
 const BANNER_ID = 'kinopoisk-watch';
 const MOVIE_TYPES = ['film', 'series'];
-const PLAYER_LINK = 'https://kinopoisk-watch.org/player/';
+const PLAYER_LINK = 'https://kinopoisk-watch-dsze5.ondigitalocean.app/player/';
 
 let lastUrl = '/';
 
