@@ -19,7 +19,7 @@ body {
     height: auto;
     color: #bababa;
     overflow-x: hidden;
-    background-color: black;
+    background-color: rgb(6, 6, 6);
     font-family: 'Inter', system-ui, sans-serif;
     transition: opacity 0.5s ease, transform 0.3s ease;
     background-position: -20px -20px;
@@ -98,7 +98,7 @@ blockquote {
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 0 12px white);
+    filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.5));
 }
 
 .installation a,
@@ -151,7 +151,7 @@ blockquote {
     width: 32px;
     height: 32px;
     margin-bottom: 1rem;
-    filter: drop-shadow(0 0 12px white);
+    filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.5));
 }
 
 .github-link:hover {
@@ -161,6 +161,7 @@ blockquote {
 .info {
     display: block;
     width: 100%;
+    margin-bottom: 4rem;
     line-height: 5em;
     white-space: nowrap;
     color: #7e7e7e;
