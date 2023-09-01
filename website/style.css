@@ -17,12 +17,11 @@ body {
     opacity: 1;
     width: 100%;
     height: auto;
-    color: white;
+    color: #bababa;
     overflow-x: hidden;
     background-color: black;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Inter', system-ui, sans-serif;
     transition: opacity 0.5s ease, transform 0.3s ease;
-    background-image: radial-gradient(#383838 1px, transparent 0);
     background-position: -20px -20px;
     background-size: 32px 32px;
 }
@@ -41,7 +40,9 @@ a:hover {
 h1,
 h2,
 h3 {
+    color: white;
     padding-bottom: 1rem;
+    text-shadow: 0 0 32px rgba(255, 255, 255, 0.3);
 }
 
 ol {
@@ -49,17 +50,22 @@ ol {
     padding-left: 0;
 }
 
-body.hidden {
-    opacity: 0;
-    transform: scaleX(1.1);
+ol li {
+    padding: 0.25rem 0;
+    padding-left: 1rem;
 }
 
 p {
-    text-align: justify;
+    font-weight: 300;
+}
+
+b {
+    color: white;
 }
 
 blockquote {
     padding: 1rem 0;
+    padding-bottom: 0;
     opacity: 1;
 }
 
@@ -73,7 +79,8 @@ blockquote {
     padding: 0 2rem;
 }
 
-.instalation {
+.installation {
+    position: relative;
     padding: 1.5rem;
     margin: 4rem 0;
     background-color: black;
@@ -81,9 +88,22 @@ blockquote {
     border-radius: 8px;
 }
 
-.instalation a,
+.installation img {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 2rem;
+    height: 2rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 12px white);
+}
+
+.installation a,
 .question a {
-    color: #ff4177;
+    color: #ffffff;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -92,7 +112,7 @@ blockquote {
 }
 
 .question p {
-    color: #5a5a5a;
+    color: #7a7a7a;
     text-align: justify;
 }
 
@@ -100,13 +120,11 @@ blockquote {
     display: block;
     width: 100%;
     height: auto;
-    max-width: 500px;
     margin: 0 auto;
-    margin-bottom: 32px;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
     user-select: none;
     pointer-events: none;
-    transform: translateY(-16px);
-    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
 }
 
 .faq-title {
@@ -118,22 +136,22 @@ blockquote {
 #github {
     cursor: pointer;
     opacity: 0.5;
-    padding-top: 32px;
-    padding-bottom: 16px;
+    margin: 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
     text-align: center;
-    border-radius: 4px;
+    transition: opacity 0.1s ease;
 }
 
 #github:hover {
     opacity: 1;
-    transition: opacity 0.2s ease;
 }
 
 #github img {
     width: 32px;
     height: 32px;
-    filter: invert(1);
-    margin-bottom: 16px;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 12px white);
 }
 
 .github-link:hover {
@@ -141,28 +159,35 @@ blockquote {
 }
 
 .info {
-    padding: 16px 0;
     display: block;
-    text-align: center;
     width: 100%;
+    line-height: 5em;
+    white-space: nowrap;
     color: #7e7e7e;
-    font-size: 11px;
-    letter-spacing: 1px;
+    font-size: 0.8rem;
+    user-select: none;
+    text-align: center;
     text-transform: uppercase;
 }
 
 .info a {
     color: white;
+    font-size: 0.8rem;
 }
 
-@keyframes example {
-    from {
-        opacity: 0;
-        transform: translateY(-64px);
+@media (max-width: 800px) {
+    .title-image {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(-16px);
+    .installation {
+        margin: 2rem 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .installation img {
+        display: none;
     }
 }

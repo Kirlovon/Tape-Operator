@@ -4,25 +4,13 @@
 // @author		Kirlovon
 // @description Watch films on Kinopoisk.ru for free! Alternative version of the script, with a temporary link to the player.
 // @icon		https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/website/favicon.png
-// @version		1.5.0
+// @version		2.0.0
 // @match		*://www.kinopoisk.ru/*
 // @grant		none
 // @run-at		document-end
 // ==/UserScript==
 
-// Vector image of the banner
-const BANNER_IMAGE = `
-<svg width="100%" height="100%" viewBox="0 0 128 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-	<path id="Banner" d="M128,0L0,0L0,512L64,480L128,512L128,0Z" style="fill:url(#bg);"/>
-	<g id="icon" transform="matrix(1,0,0,1,-64,0)">
-		<path d="M168,382C168,360.057 149.943,342 128,342C106.057,342 88,360.057 88,382C88,403.943 106.057,422 128,422L165,422L168,410L162,410L160,414L152,414C162.065,406.452 168,394.581 168,382ZM96,382C96,364.445 110.445,350 128,350C145.555,350 160,364.445 160,382C160,399.555 145.555,414 128,414C110.445,414 96,399.555 96,382ZM128,393C132.415,393 136,396.585 136,401C136,405.415 132.415,409 128,409C123.585,409 120,405.415 120,401C120,396.585 123.585,393 128,393ZM144,383C148.415,383 152,386.585 152,391C152,395.415 148.415,399 144,399C139.585,399 136,395.415 136,391C136,386.585 139.585,383 144,383ZM112,383C116.415,383 120,386.585 120,391C120,395.415 116.415,399 112,399C107.585,399 104,395.415 104,391C104,386.585 107.585,383 112,383ZM144,365C148.415,365 152,368.585 152,373C152,377.415 148.415,381 144,381C139.585,381 136,377.415 136,373C136,368.585 139.585,365 144,365ZM112,365C116.415,365 120,368.585 120,373C120,377.415 116.415,381 112,381C107.585,381 104,377.415 104,373C104,368.585 107.585,365 112,365ZM128,355C132.415,355 136,358.585 136,363C136,367.415 132.415,371 128,371C123.585,371 120,367.415 120,363C120,358.585 123.585,355 128,355Z" style="fill:rgb(235,255,255);fill-rule:nonzero;"/>
-	</g>
-	<defs>
-		<linearGradient id="bg" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(128,512,-2048,512,0,0)"><stop offset="0" style="stop-color:rgb(248,12,101);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(247,88,27);stop-opacity:1"/></linearGradient>
-	</defs>
-</svg>
-`;
-
+const BANNER_IMAGE = 'data:image/webp;base64,UklGRggJAABXRUJQVlA4WAoAAAAQAAAAfwAA/wEAQUxQSG8AAAABHyAQIKRbU2YjIoITjNpGktQIht2+huSQWiJzVKUQdET/FaZtw7hDv3zt/7T/NQS1//0zbazUqhlatVI3oZvMi8iLxIfAB64AK6BKoBKmAWkgWoAWL8AKcCKMCC1EClFihJjXgMeA24jLiGPISFsAVlA4IHIIAAAQNQCdASqAAAACPlEokUajoiQhoZK4+IAKCWlu3dXX6pdGhtn29jG96jdqv9c6S/uX7Yf0bedsw316/BcJvwQ1Avxr+Vf3negc//xnoEd1f9bxgeIB+rHEDUAPzj/y/ZU/jv+1/mf8d6QfoX/x+4T/Jv7P/yPWg9an7aexF+nf////4ePKFxarhpg9Usri1XDTB6pZXFqt3QSrDyAeqWVxarhpg6nlMjuA9Usri1XDTB6pPJv220CUBzCXSpvVMO4Eu2oqUuz0mmSjPHjecjTBa7y/ln50JBrfWqaYCiKwU0pzzFGySCj41WmRU2tCk52YQdkjvXa6U63Lcd2r5bCWqCLZ4stGbCI0fOb2WQtdVE8OYkltrMpN37D79SHtFXfIZ5w4bK/jHOdeuJoE93xF6V130PPuvB2wSW1HoiDahfZe51A893gIwHnMaDy7pI+X3a2QTRW0flJ9Isx4xsgyh+OstbyeQU2Rkd1RfvIVvJc2JpJa/beUOI0+FMzckV+8Lnv6PECRWGYU4TO1t4meecyOk0WqmKpcJ1ddXSOuJPloZhfPI5fLT3C+giDv141wAP79bkgAAAAAtUNqNmS1AK1f40Wz6DwpygDVW9lOnS30K2IAFIeTYtwMu+Jd3p/MuyApD0BWxev2utSRBFvOYP6xzSWa673Ki0AouGVlHPosqCDvvNSS/76wP+fIV+/x51KgfCnUi5JEQf11rQ/u2qVg6oSxUbXygHsQlc70E70MTAPZd37B7SG3zZQbft9pRf+sNKvMxGvz86/BR9rEciXfBbkDAfg1qoVKHiYm4KQtXAw+Q0tosRKO2oJjxsDOG0SgLSRnnJPK23ci556h1V1W68vugquw5SLcr422nDRH2T/T2n0pXzKZiirxHsvdZqlDDppydZrjMfxHaQEfezkkBS7Kpl3/yGP694VFgF2ajmZQh4piInAv5srKrQjhNNEFZWlHHy2UDDQ25NJ/HIWuTdapoy7tcDhLepEphquBHsk9zR6o0sT5r3XhEjOC6ljmH4wEuVNzLO2gMG4+jVtddA9Qmaa/cneppF8cEx9Erk/jCOYew9Oos/fRs5g71FCPV9V38cLo872tMk6zscJP3boSLLcLE1I2pR+miNMobeNV/EI1WJFe97bYSoGXYfvEUyi5PB5C1D3v/TlyEr0PyZ1fxuDKa25AxRdcqUoVqrApOQbHdEPEWdp10DLXFtqSP6r2ddXhhFdMnBZqq9b+es82oDm10bANQAE8GNXulTlprYktv0cqCZpTMFG+8wpQyaVKVUmYJsG34Z0Adj+oDdGWUh4MHLJP6FIncKkBKzDrLLj2hAqRUx8cGYEtiBGelS2EpU2qU/NFNMz0TDu6mEWI9yL0mi7VllaiG5VfKTE8PAxwHvaBSZ3xquRjvEw17m3sq4SDvrm2uWxvvR91ab1zVKoyXgXnQP1OCNKse3Jzwb+ZvrzSiVLUqkUHcFpwcIsjAql6RuDfODut6V+iIx//p4Qj7tSHeCwg5XDNfwE/9ofLZxU2fTD8n9S+doB3mlG5/vM/horp3tMLYuELqUTHAe6tttY0H2yi9aLpeCROT57eDkcg7vYydjnuJCci8Zqsw5P5QzqbHH2z2/uUkkD+lsxs2VsjeZSl28VFj/+nhCPu1IdZFA8U93/DanvaQW2d5T43MNqgsqmf0RplB+pYKjrCqOGvKDiP5bFwhdSiTm9mfycXVjCpYjxD92UXrRn5cxe+qdHzPzOAg4HS2gLZq4OdLe9w8wWvEdhJKoUukvLSg8/icquPwwe0mqJFj7stDquwUEXw57HzmVJUH5iR7nvQinB3HWJu06Qp9hPU9Xi926EkWQLSN6qcveWilcIqslNEJk9Ret8EiGqQk5SPfE7Fm7RW3PoGVr9I5RcVH4IZvJnYXwXaKyjuO8Tk2+XluVrkb90f7q2sHWX6zUJfQ7k71NH21FhTXtqcb5zjS0L8uE4iWHTAU0qAzLT8jblDncJW1/E/d1398wiHcePDQZVOvITFsgdboWmSoxZwuVH5a4DwwsiWLuox8lE0D57YBfpsNigJ16VFXHkQMSOOIOPCD3GEkx46sNuZELCCO6bpufFy9J3EBgYYj560RIRo76FFtupB8uMRZTP+fOmk5tiWUQc/EvAVrr03dyyDPtqFuq/7Hg9ajd6h2Tol6cq1b4egjuUoIKFduOFCRB9e3Gulfy1sHz3ykss0r/Z9/TlwPG0412X6aAPrU1KSk6Aewj9WKaOCqnWjc4HeEkysOC0rIneZXMXBXWAzpZffpJhY+PcQUSlFUrjTewvpgrexjmHHMzI/1smeGRVPJHVtWRX5MbeyrlA4EW5uMOSEEXVSSKdI7XdZUlTowwLX54AsB9cw0mLs9x53rtt6uLFM9Ve2fmc76KgyXdhifoZnqFZ1SOccwbSRxenEHNBRJvkX13ZXFZzlklLglbL+AahjO/EXzZNt5VpL/yuvnellH50fw2cX0DrYn1vlnlvSeef39vpCW+UPXEkUw59xVTOo9LBjnPIsWLeQR0qKDtdMH2B4SdaeMszAH85+JvOEOj1wGo4eCc5AOz5iKDwHFV/k+TxLyQSPpNWr5nn4ixLcICk0ucpsqAapX9bZr2IcjSLuG30hsnhIHY6JIU5t1Q09W/ZKT3PgkjL+q22l1C+4F3L5rO5ttWLBPLhCmgFW7Y7FPmRzo3qcfwrrGQ86+oWxdyG34a2tXwTOpZ8cpCuZakWO8B4HRJdfdS+e/Xx+P4D0zcxZT04p77HDxAGhsVHuJPnGMZwp/mkuZH5A+fEYrhuZm7guk39DDZpfjXM+J4a4CQ3/dTd/+WpKoL+sByya778AM8/UrvuEf5c/qtJf71VOcDy5e0csAk6AAA==';
 const BANNER_ID = 'kinopoisk-watch';
 const MOVIE_TYPES = ['film', 'series'];
 const PLAYER_LINK = 'https://kinopoisk-watch-dsze5.ondigitalocean.app/player/';
@@ -36,7 +24,9 @@ function mountBanner() {
 	const banner = document.createElement('a');
 	banner.target = '_blank';
 	banner.id = BANNER_ID;
-	banner.innerHTML = BANNER_IMAGE;
+	banner.style.backgroundImage = `url(${BANNER_IMAGE})`;
+	banner.style.backgroundSize = 'contain';
+	banner.style.backgroundRepeat = 'no-repeat'
 	banner.style.width = '32px';
 	banner.style.height = '128px';
 	banner.style.top = '-128px';
@@ -48,11 +38,11 @@ function mountBanner() {
 	banner.style.transition = 'top 0.2s ease';
 
 	// Events
-	banner.addEventListener('mouseover', () => { banner.style.top = '-16px' });
-	banner.addEventListener('mouseout', () => { banner.style.top = '-32px' });
+	banner.addEventListener('mouseover', () => { banner.style.top = '-4px' });
+	banner.addEventListener('mouseout', () => { banner.style.top = '-24px' });
 
 	// Show with delay
-	setTimeout(() => { banner.style.top = '-32px' }, 300);
+	setTimeout(() => { banner.style.top = '-24px' }, 300);
 
 	document.body.appendChild(banner);
 }

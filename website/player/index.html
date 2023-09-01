@@ -6,6 +6,8 @@
 	<link rel="icon" href="/favicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Kinopoisk Watch</title>
+	<link rel="preconnect" href="https://rsms.me/">
+	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 	<link rel="stylesheet" href="./style.css">
 </head>
 
@@ -16,61 +18,57 @@
 	</a>
 
 	<div id="container">
-		<div id="yohoho" data-resize="1" data-bg="#000000" data-loading="./loading.webp"></div>
+		<div id="player"></div>
 	</div>
 
 	<span id="info">
-		Made with ♥ by <a href="https://github.com/Kirlovon" target="_blank">Kirlovon</a>.
-		Powered by <a href="https://yohoho.cc/" target="_blank">Yohoho</a>.
+		Made with ♥ by <a href="https://github.com/kirlovon" target="_blank">Kirlovon</a>.
+		Powered by <a href="https://kinobox.tv" target="_blank">Kinobox</a>.
 	</span>
+
+	<div id="background"></div>
+
+	<script src="https://kinobox.tv/kinobox.min.js"></script>
 
 	<script>
 		const container = document.getElementById('container');
-		const yohoho = document.getElementById('yohoho');
-		let isLoaded = false;
+		const player = document.getElementById('player');
 
-		// Display text message
-		function setMessage(text) {
-			const messageElement = document.createElement('p');
-			messageElement.innerText = text;
-			container.innerHTML = '';
-			container.appendChild(messageElement);
-		}
-
-		// Initialize player
+		// Initialize page
 		function init() {
 			const params = new URLSearchParams(window.location.search);
 			let id = params.get('id') || window.location.hash.replace(/\D/g, '');
 
-			if (id) {
-				yohoho.setAttribute('data-kinopoisk', id);
-			} else {
-				setMessage('ID фильма не указаны!');
-			}
+			const kinobox = new Kinobox('#player', { search: { kinopoisk: id } });
+			kinobox.init();
 		}
-
-		// Listen for loading events
-		document.addEventListener('DOMContentLoaded', () => {
-			window.addEventListener('message', (event) => {
-				if (!event || !event.data) return;
-				if (event.data.event === 'playerReady') isLoaded = true;
-				if (event.data.quality || event.data.translate) isLoaded = true;
-			});
-
-			window.addEventListener('load', () => {
-				setTimeout(() => {
-					if (!isLoaded) {
-						const scriptAttached = !!(document.getElementById('yohoho-iframe') || document.getElementById('yohoho-loading'));
-						setMessage(scriptAttached ? 'Не удалось загрузить фильм!' : 'Не удалось загрузить плеер!');
-					}
-				}, 10000);
-			});
-		});
 
 		init();
 	</script>
 
-	<script src="//yohoho.cc/yo.js"></script>
+	<!-- Modify Kinobox styles -->
+	<style>
+		.menuList li {
+			color: white !important;
+			background-color: black !important;
+			border-bottom: 1px solid #212121 !important;
+		}
+
+		.menuList li:hover {
+			background: rgb(26, 26, 26) !important;
+		}
+
+		.menuList ul {
+			outline: none !important;
+			border: 1px solid #212121 !important;
+		}
+
+		.kinobox__message,
+		.kinobox__loader,
+		.kinobox__wrapper {
+			background-color: black !important;
+		}
+	</style>
 </body>
 
 </html>

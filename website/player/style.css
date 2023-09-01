@@ -2,12 +2,6 @@
 	box-sizing: border-box;
 }
 
-iframe {
-	width: 100%;
-	height: 100%;
-	border: none;
-}
-
 body {
 	margin: 0;
 	padding: 0;
@@ -17,11 +11,8 @@ body {
 	color: white;
 	overflow: hidden;
 	color-scheme: dark;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: 'Inter', system-ui, sans-serif;
 	background: black;
-	background-image: radial-gradient(#898989 1px, transparent 0);
-	background-position: -20px -20px;
-  	background-size: 32px 32px;
 }
 
 a {
@@ -37,7 +28,7 @@ a:hover {
 
 #logo {
 	position: fixed;
-	z-index: 999;
+	z-index: 9999;
 	top: 1em;
 	left: 50%;
 	width: 3em;
@@ -53,6 +44,7 @@ a:hover {
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
+	z-index: 999;
 	top: 50%;
 	left: 50%;
 	width: 100%;
@@ -66,14 +58,31 @@ a:hover {
 	border-radius: 8px;
 }
 
-#yohoho {
+#player {
 	display: block;
 	width: 100%;
 	height: 100%;
 }
 
+#background {
+	z-index: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: black;
+	background-image: radial-gradient(#5d5d5d 1px, transparent 0);
+	background-position: -20px -20px;
+	background-size: 32px 32px;
+	background-position: center;
+	animation-name: BackgroundReveal;
+	animation-duration: 2s;
+}
+
 #info {
 	position: fixed;
+	z-index: 99;
 	display: block;
 	bottom: 0;
 	left: 50%;
@@ -106,9 +115,9 @@ a:hover {
 
 @media (max-width: 700px) {
 	body {
-		font-size: 11px;
+		font-size: 13px;
 	}
-	
+
 	#container {
 		border-radius: 0;
 		border-left: none;
@@ -118,7 +127,22 @@ a:hover {
 
 @media (max-width: 360px) {
 	body {
-		font-size: 10px;
+		font-size: 11px;
 		background-size: 16px 16px;
+	}
+}
+
+@keyframes BackgroundReveal {
+	0% {
+		background-size: 256px 256px;
+		opacity: 0;
+	}
+
+	50% {
+		opacity: 1;
+	}
+
+	100% {
+		background-size: 32px 32px;
 	}
 }

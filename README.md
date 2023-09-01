@@ -1,4 +1,4 @@
-![Image](https://raw.githubusercontent.com/Kirlovon/Kinopoisk-Watch/master/image.png)
+![Image](/assets/image.webp)
 
 Скрипт, превращающий [Kinopoisk.ru](https://www.kinopoisk.ru/) в бесплатный онлайн - кинотеатр! На каждой странице с фильмом или сериалом, в левом верхнем углу появляется флажок, нажав на который, откроется плеер с фильмом.
 
@@ -15,7 +15,7 @@
 
 ## Лицензия
 
-Скрипт работает на основе плеера [Yohoho.cc](https://yohoho.cc/), и предоставляется исключительно в ознакомительных целях!
+Скрипт работает на основе плеера [Kinobox.tv](https://kinobox.tv/), и предоставляется исключительно в ознакомительных целях!
 **_Пиратство - плохо!_**
 
 MIT _([LICENSE](https://github.com/Kirlovon/Kinopoisk-Watch/blob/master/LICENSE) файл)_
