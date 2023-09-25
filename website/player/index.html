@@ -39,7 +39,31 @@
 			const params = new URLSearchParams(window.location.search);
 			let id = params.get('id') || window.location.hash.replace(/\D/g, '');
 
-			const kinobox = new Kinobox('#player', { search: { kinopoisk: id } });
+
+			const defaultConfig = {
+				enable: true,
+				token: '{token}',
+			}
+
+			const kinobox = new Kinobox('#player', {
+				search: { kinopoisk: id },
+				players: {
+					Alloha: defaultConfig,
+					Ashdi: defaultConfig,
+					Cdnmovies: defaultConfig,
+					Collaps: defaultConfig,
+					Hdvb: defaultConfig,
+					Iframe: defaultConfig,
+					Kodik: defaultConfig,
+					Videocdn: defaultConfig,
+					Voidboost: defaultConfig,
+					Bazon: {
+						enable: true,
+						token: '7705a0ec196f4b05f1acba6e89442af7',
+					}
+				}
+			});
+
 			kinobox.init();
 		}
 
@@ -78,7 +102,6 @@
 			border: 1px solid #212121 !important;
 			background: black !important;
 		}
-
 
 		.kinobox__message,
 		.kinobox__loader,
