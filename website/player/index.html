@@ -8,13 +8,13 @@
 	<title>Kinopoisk Watch</title>
 	<link rel="preconnect" href="https://rsms.me/">
 	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="/player/style.css">
 </head>
 
 <body>
 
 	<a id="logo" href="https://github.com/Kirlovon/Kinopoisk-Watch" target="_blank">
-		<img src="./logo.svg" alt="Logo">
+		<img src="/player/logo.svg" alt="Logo">
 	</a>
 
 	<div id="container">
@@ -47,20 +47,26 @@
 
 			const kinobox = new Kinobox('#player', {
 				search: { kinopoisk: id },
+				menu: {
+					format: '{N} :: {S} ({T}, {Q})',
+				},
 				players: {
+					Collaps: {
+						...defaultConfig,
+						position: 0,
+					},
+					Bazon: {
+						...defaultConfig,
+						token: '7705a0ec196f4b05f1acba6e89442af7',
+					},
 					Alloha: defaultConfig,
 					Ashdi: defaultConfig,
 					Cdnmovies: defaultConfig,
-					Collaps: defaultConfig,
 					Hdvb: defaultConfig,
 					Iframe: defaultConfig,
 					Kodik: defaultConfig,
 					Videocdn: defaultConfig,
 					Voidboost: defaultConfig,
-					Bazon: {
-						enable: true,
-						token: '7705a0ec196f4b05f1acba6e89442af7',
-					}
 				}
 			});
 
