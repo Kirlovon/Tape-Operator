@@ -4,7 +4,7 @@
 // @author		Kirlovon
 // @description Watch films on Kinopoisk.ru for free! Alternative version of the script, with a temporary link to the player.
 // @icon		https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/website/favicon.png
-// @version		2.0.0
+// @version		2.1.0
 // @match		*://www.kinopoisk.ru/*
 // @grant		none
 // @run-at		document-end
@@ -67,8 +67,8 @@ function updateBanner() {
 
 	const banner = document.getElementById(BANNER_ID);
 	const urlData = url.split('/');
-	const movieId = urlData[4];
-	const movieType = urlData[3];
+	const movieId = urlData.at(4);
+	const movieType = urlData.at(3);
 
 	// Unmount if link is invalid
 	if (!movieId || !movieType || !MOVIE_TYPES.includes(movieType)) {
@@ -78,7 +78,20 @@ function updateBanner() {
 
 		const link = new URL(PLAYER_LINK);
 		link.searchParams.set('id', movieId);
+		link.searchParams.set('title', extractTitle(document.title));
 		document.getElementById(BANNER_ID).setAttribute('href', link.toString());
+	}
+}
+
+/**
+ * Extract movie title from the page
+ */
+function extractTitle(title) {
+	try {
+		const extracted = title.split('-').at(0).split(',').at(0).trim();
+		return extracted ? extracted : title.split(',').at(0).trim();
+	} catch (error) {
+		return title.split(',').at(0).trim();
 	}
 }
 

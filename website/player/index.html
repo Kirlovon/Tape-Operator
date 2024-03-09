@@ -38,7 +38,11 @@
 		function init() {
 			const params = new URLSearchParams(window.location.search);
 			let id = params.get('id') || window.location.hash.replace(/\D/g, '');
+			let title = params.get('title');
 
+			if (title) {
+				document.title = `${title} | Kinopoisk Watch`;
+			}
 
 			const defaultConfig = {
 				enable: true,
@@ -69,6 +73,7 @@
 					Voidboost: defaultConfig,
 				}
 			});
+
 
 			kinobox.init();
 		}
