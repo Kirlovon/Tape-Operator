@@ -1,0 +1,203 @@
+.kinobox_hidden {
+    display: none !important
+}
+
+.kinobox_wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16/9;
+    background: #111;
+    overflow: hidden;
+    user-select: none
+}
+
+.kinobox_loader {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: #111;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23dddddd' style='animation: loader_spin 2s linear infinite;'%3E%3Cstyle%3E%0A@keyframes loader_spin %7Bfrom %7Btransform: rotate(0deg);%7D to %7Btransform: rotate(360deg);%7D%7D%0A%3C/style%3E%3Cpath d='M2 11h5v2H2zm15 0h5v2h-5zm-6 6h2v5h-2zm0-15h2v5h-2zM4.222 5.636l1.414-1.414 3.536 3.536-1.414 1.414zm15.556 12.728-1.414 1.414-3.536-3.536 1.414-1.414zm-12.02-3.536 1.414 1.414-3.536 3.536-1.414-1.414zm7.07-7.071 3.536-3.535 1.414 1.415-3.536 3.535z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: 64px;
+    background-repeat: no-repeat;
+    background-position: center
+}
+
+.kinobox_message {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 16px;
+    background: #111;
+    font: 32px system-ui, sans-serif;
+    color: #eee;
+    text-align: center
+}
+
+.kinobox_iframe_wrapper {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    height: 100%
+}
+
+.kinobox_iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+    border: none
+}
+
+.kinobox_nav[disabled] {
+    display: none !important
+}
+
+.kinobox_nav[active] {
+    display: block !important
+}
+
+.kinobox_nav_ul {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+.kinobox_nav_button {
+    display: none;
+    position: absolute;
+    z-index: 300;
+    top: 50%;
+    transform: translate(0, -50%);
+    width: 48px;
+    height: 48px;
+    background-color: #5a535e;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='%23fafafa'%3E%3Cpath d='M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z'%3E%3C/path%3E%3C/svg%3E%0A");
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 99px;
+    outline: solid 4px #00000033;
+    cursor: pointer
+}
+
+.kinobox_nav_button[enabled] {
+    display: block
+}
+
+.kinobox_nav_button:hover {
+    background-color: #665f6c
+}
+
+.kinobox_nav_button span {
+    display: none
+}
+
+.menu_button .kinobox_nav_button {
+    left: unset !important;
+    right: 16px !important
+}
+
+.menu_button ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    display: none;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow-y: auto;
+    padding: 8px 80px 8px 8px !important;
+    background: #202020dd;
+    box-sizing: border-box;
+    backdrop-filter: blur(10px)
+}
+
+.menu_button ul[active] {
+    display: block
+}
+
+.menu_button li {
+    display: block;
+    overflow: hidden;
+    padding: 16px;
+    margin-bottom: 8px;
+    background: #303030;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px #111;
+    font: 14px 'Tahoma', sans-serif;
+    color: #fafafa;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer
+}
+
+.menu_button li:last-child {
+    margin-bottom: 0
+}
+
+.menu_button li:hover {
+    background: #404040 !important
+}
+
+.menu_button li[active] {
+    background: #5a535e
+}
+
+.menu_list .kinobox_nav_button {
+    left: 16px !important;
+    right: unset !important
+}
+
+.menu_list ul {
+    position: absolute;
+    z-index: 200;
+    top: 50%;
+    right: -205px;
+    transform: translate(0, -50%);
+    display: block;
+    width: 240px;
+    max-height: calc(100% - 120px);
+    overflow-y: auto;
+    border-radius: 3px 0 0 3px;
+    box-shadow: 0 1px 2px #00000055;
+    outline: solid 4px #00000033;
+    transition: right .1s linear
+}
+
+.menu_list ul[active="true"] {
+    right: 0 !important
+}
+
+.menu_list li {
+    display: block;
+    float: none;
+    overflow: hidden;
+    padding: 8px 7px 8px 10px;
+    background: #fff;
+    border-bottom: solid 1px #ccc;
+    font: 13px 'Tahoma', sans-serif;
+    color: #111;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer
+}
+
+.menu_list li:last-child {
+    border-bottom: none
+}
+
+.menu_list li:hover {
+    background: #ffedac !important
+}
+
+.menu_list li[active] {
+    background: #d9f99d
+}
