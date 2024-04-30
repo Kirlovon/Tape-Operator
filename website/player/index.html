@@ -9,6 +9,23 @@
 	<link rel="preconnect" href="https://rsms.me/">
 	<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 	<link rel="stylesheet" href="/player/style.css">
+
+	<!-- Analytics -->
+	<script defer data-domain="kinopoisk-watch.org" src="https://analytics.kirlovon.dev/js/script.manual.js"></script>
+	<script>window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+	<script>
+		function prepareUrl(params) {
+			const url = new URL(location.href)
+			const queryParams = new URLSearchParams(location.search)
+			let customUrl = url.protocol + '//' + url.hostname + url.pathname.replace(/\/$/, '')
+			for (const paramName of params) {
+				const paramValue = queryParams.get(paramName)
+				if (paramValue) customUrl = customUrl + '/' + paramValue
+			}
+			return customUrl
+		}
+		plausible('pageview', { u: prepareUrl(['id', 'title']) + window.location.search })
+	</script>
 </head>
 
 <body>
