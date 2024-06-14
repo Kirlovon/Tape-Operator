@@ -46,7 +46,6 @@
 	<div id="background"></div>
 
 	<script src="https://kinobox.tv/kinobox.min.js"></script>
-
 	<script>
 		const container = document.getElementById('container');
 		const player = document.getElementById('player');
@@ -97,15 +96,26 @@
 
 	<!-- Modify Kinobox styles -->
 	<style>
+		.kinobox_nav_ul {
+			outline: none !important;
+			border-radius: 4px 0 0 4px !important;
+			border: 1px solid #212121 !important;
+			border-right: none !important;
+		}
+
 		.kinobox_nav_ul li {
 			color: white !important;
 			background-color: black !important;
 			border-bottom: 1px solid #212121 !important;
 		}
 
+		.kinobox_nav_ul li:last-child {
+			border-bottom: none !important
+		}
+
 		.kinobox_nav_ul li:hover,
 		.menu_button li:hover {
-			background: rgb(26, 26, 26) !important;
+			background: rgb(16, 16, 16) !important;
 		}
 
 		.kinobox_nav_ul ul {

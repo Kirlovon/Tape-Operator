@@ -19,7 +19,7 @@ body {
     height: auto;
     color: #bababa;
     overflow-x: hidden;
-    background-color: rgb(6, 6, 6);
+    background-color: #080808;
     font-family: 'Inter', system-ui, sans-serif;
     transition: opacity 0.5s ease, transform 0.3s ease;
     background-position: -20px -20px;
@@ -113,7 +113,6 @@ blockquote {
 
 .question p {
     color: #7a7a7a;
-    text-align: justify;
 }
 
 .title-image {
@@ -168,7 +167,6 @@ blockquote {
     font-size: 0.8rem;
     user-select: none;
     text-align: center;
-    text-transform: uppercase;
 }
 
 .info a {
