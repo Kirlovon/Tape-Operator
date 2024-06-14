@@ -21,9 +21,6 @@ body {
     overflow-x: hidden;
     background-color: #080808;
     font-family: 'Inter', system-ui, sans-serif;
-    transition: opacity 0.5s ease, transform 0.3s ease;
-    background-position: -20px -20px;
-    background-size: 32px 32px;
 }
 
 a {
@@ -42,7 +39,7 @@ h2,
 h3 {
     color: white;
     padding-bottom: 1rem;
-    text-shadow: 0 0 32px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 32px #ffffff4d;
 }
 
 ol {
@@ -83,8 +80,8 @@ blockquote {
     position: relative;
     padding: 1.5rem;
     margin: 4rem 0;
-    background-color: black;
-    border: 1px solid #212121;
+    background-color: #080808;
+    border: 1px solid #303030;
     border-radius: 8px;
 }
 
@@ -98,13 +95,13 @@ blockquote {
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.5));
+    filter: drop-shadow(0 0 0.5rem #3030307d);
 }
 
 .installation a,
 .question a {
     color: #ffffff;
-    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 4px #3030307d;
 }
 
 .question {
@@ -124,12 +121,14 @@ blockquote {
     margin-bottom: 3rem;
     user-select: none;
     pointer-events: none;
+    border: 1px solid #303030;
+    border-radius: 8px;
 }
 
 .faq-title {
     width: 100%;
     margin-bottom: 16px;
-    border-bottom: 1px solid #242424;
+    border-bottom: 1px solid #303030;
 }
 
 #github {

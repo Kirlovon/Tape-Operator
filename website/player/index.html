@@ -30,35 +30,37 @@
 
 <body>
 
-	<a id="logo" href="https://github.com/Kirlovon/Kinopoisk-Watch" target="_blank">
-		<img src="/player/logo.svg" alt="Logo">
-	</a>
-
-	<div id="container">
-		<div id="player"></div>
+	<div id="wrapper">
+		<div class="header">
+			<div id="title"></div>
+			<a id="logo" href="https://github.com/Kirlovon/Kinopoisk-Watch" target="_blank">
+				<img src="/player/logo.svg" alt="Logo">
+			</a>
+		</div>
+		<div class="content">
+			<div id="player"></div>
+		</div>
+		<div class="footer">
+			<span>
+				Made with ♥ by <a href="https://github.com/kirlovon" target="_blank">Kirlovon</a>.
+				Powered by <a href="https://kinopoisk-watch.org/" target="_blank">Kinopoisk Watch</a>.
+			</span>
+		</div>
 	</div>
-
-	<span id="info">
-		Made with ♥ by <a href="https://github.com/kirlovon" target="_blank">Kirlovon</a>.
-		Powered by <a href="https://kinobox.tv" target="_blank">Kinobox</a>.
-	</span>
 
 	<div id="background"></div>
 
 	<script src="https://kinobox.tv/kinobox.min.js"></script>
 	<script>
-		const container = document.getElementById('container');
-		const player = document.getElementById('player');
+		const containerElement = document.getElementById('container');
+		const playerElement = document.getElementById('player');
+		const titleElement = document.getElementById('title');
 
 		// Initialize page
 		function init() {
 			const params = new URLSearchParams(window.location.search);
 			let id = params.get('id') || window.location.hash.replace(/\D/g, '');
 			let title = params.get('title');
-
-			if (title) {
-				document.title = `${title} | Kinopoisk Watch`;
-			}
 
 			const defaultConfig = {
 				enable: true,
@@ -89,6 +91,11 @@
 					Voidboost: defaultConfig,
 				}
 			});
+
+			if (title) {
+				document.title = `${title} | Kinopoisk Watch`;
+				titleElement.innerHTML = title.replace(/\(([^)]+)\)/g, '<i>($1)</i>');
+			}
 		}
 
 		init();
