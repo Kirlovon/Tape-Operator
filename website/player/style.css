@@ -35,12 +35,17 @@ a:hover {
 	flex-direction: column;
 	justify-content: space-between;
 	width: 100%;
+	opacity: 0;
 	max-width: 700px;
 	max-height: 500px;
 	overflow: hidden;
 	border-radius: 8px;
 	background-color: #080808;
 	border: 1px solid #303030;
+	animation-name: WrapperReveal;
+	animation-fill-mode: forwards;
+	animation-duration: 0.5s;
+	animation-delay: 0.5s;
 }
 
 .header,
@@ -114,6 +119,7 @@ a:hover {
 #background {
 	z-index: 0;
 	position: fixed;
+	opacity: 0;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -121,10 +127,21 @@ a:hover {
 	background-color: #080808;
 	background-image: radial-gradient(#303030 1px, transparent 0);
 	background-position: -20px -20px;
-	background-size: 32px 32px;
+	background-size: 36px 36px;
 	background-position: center;
 	animation-name: BackgroundReveal;
+	animation-fill-mode: forwards;
 	animation-duration: 1s;
+}
+
+#gradient {
+	z-index: 99;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background: linear-gradient(0deg, #080808 -75%, transparent 100%);
 }
 
 #title {
@@ -158,10 +175,24 @@ a:hover {
 	}
 }
 
+@keyframes WrapperReveal {
+	0% {
+		opacity: 0;
+		filter: blur(8px);
+		transform: scale(1.1);
+	}
+
+	100% {
+		opacity: 1;
+		filter: blur(0px);
+		transform: scale(1);
+	}
+}
+
 @keyframes BackgroundReveal {
 	0% {
-		background-size: 36px 36px;
 		opacity: 0;
+		background-size: 36px 36px;
 	}
 
 	100% {
