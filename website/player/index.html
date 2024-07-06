@@ -57,11 +57,27 @@
 		const playerElement = document.getElementById('player');
 		const titleElement = document.getElementById('title');
 
+		// Blocked movies IDs
+		const blockedIds = new Set(['1071383']);
+
 		// Initialize page
 		function init() {
 			const params = new URLSearchParams(window.location.search);
 			let id = params.get('id') || window.location.hash.replace(/\D/g, '');
 			let title = params.get('title');
+
+			if (title) {
+				document.title = `${title} | Kinopoisk Watch`;
+				titleElement.innerHTML = title.replace(/\(([^)]+)\)/g, '<i>($1)</i>');
+			}
+
+			if (blockedIds.has(id)) {
+				const blockedElement = document.createElement('div');
+				blockedElement.innerText = 'Удалено по запросу правообладателя.';
+				blockedElement.className = 'blocked-message';
+				playerElement.appendChild(blockedElement);
+				return;
+			}
 
 			const defaultConfig = {
 				enable: true,
@@ -92,11 +108,6 @@
 					Voidboost: defaultConfig,
 				}
 			});
-
-			if (title) {
-				document.title = `${title} | Kinopoisk Watch`;
-				titleElement.innerHTML = title.replace(/\(([^)]+)\)/g, '<i>($1)</i>');
-			}
 		}
 
 		init();
