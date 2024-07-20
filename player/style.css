@@ -1,0 +1,348 @@
+@import url('https://rsms.me/inter/inter.css');
+
+/* CSS Variables -------------------------------- */
+
+:root {
+	--color-white: white;
+	--color-grey: #7e7e7e;
+	--color-border: #303030;
+	--color-bg: #0d0d0d;
+	--color-warning-text: #ffeed6;
+	--color-warning-border: #ff9800;
+	--color-warning-bg: #241600;
+	--color-error-text: #fed7d5;
+	--color-error-border: #e00702;
+	--color-error-bg: #230100;
+}
+
+/* Base Styles -------------------------------- */
+
+:root {
+	font-size: 16px;
+	color-scheme: dark;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	min-height: 100vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+	color: var(--color-white);
+	background-color: var(--color-bg);
+	font-family: 'Inter', system-ui, sans-serif;
+}
+
+button {
+	all: unset;
+	cursor: pointer;
+}
+
+a {
+	cursor: pointer;
+	color: var(--color-white);
+	text-decoration: none;
+	text-underline-offset: 0.3em;
+}
+
+a:hover,
+a:focus {
+	outline: none;
+	text-decoration: underline;
+}
+
+#container {
+	position: relative;
+	z-index: 999999;
+	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	width: 100%;
+	height: fit-content;
+	min-height: 512px;
+	max-width: 722px; /* 720px + left & right borders */
+	filter: drop-shadow(0 16px 32px var(--color-bg)) drop-shadow(0 4px 8px var(--color-bg));
+}
+
+/* Player Styles -------------------------------- */
+
+#player {
+	position: relative;
+	z-index: 9999;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	border-radius: 8px;
+	background-color: var(--color-bg);
+	border: 1px solid var(--color-border);
+}
+
+#content {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	aspect-ratio: 16 / 9;
+}
+
+#content > span {
+	display: block;
+	text-align: center;
+	font-family: monospace;
+	padding: 1rem;
+	font-size: 1rem;
+}
+
+#content iframe {
+	all: unset;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-color: var(--color-bg);
+}
+
+#logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	user-select: none;
+	margin-left: auto;
+	height: 100%;
+	margin-right: -0.75rem;
+	padding: 0 0.75rem;
+	border-left: 1px solid var(--color-border);
+}
+
+#logo img {
+	display: block;
+	height: 1.25rem;
+	width: 1.25rem;
+}
+
+#title {
+	color: var(--color-white);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#title span {
+	color: var(--color-grey);
+	font-style: normal;
+}
+
+#version {
+	width: min-content;
+}
+
+#header,
+#sources,
+#footer {
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	font-size: 0.8rem;
+	padding: 0 0.75rem;
+	width: 100%;
+	height: 2.5rem;
+	min-height: 2.5rem;
+	line-height: 2.5rem;
+	font-weight: 200;
+	white-space: nowrap;
+	color: var(--color-grey);
+}
+
+#header {
+	border-bottom: 1px solid var(--color-border);
+}
+
+#sources {
+	overflow-x: auto;
+	padding: 0 0.25rem;
+	border-top: 1px solid var(--color-border);
+	justify-content: flex-end;
+}
+
+#footer {
+	gap: 1rem;
+	overflow-x: auto;
+	border-top: 1px solid var(--color-border);
+	justify-content: space-between;
+}
+
+.source {
+	display: flex;
+	opacity: 0;
+	border: none;
+	cursor: pointer;
+	justify-content: center;
+	align-items: center;
+	min-width: fit-content;
+	border-radius: 4px;
+	padding: 0.15rem 0.5rem;
+	line-height: 1.5rem;
+	color: var(--color-grey);
+	background-color: transparent;
+	transition: color 0.1s ease, transform 0.1s ease;
+	animation: Reveal 0.3s ease forwards;
+}
+
+.source:not(.selected):active {
+	transform: translateY(2px);
+}
+
+.source:hover,
+.source:focus {
+	color: var(--color-white);
+	outline: none;
+}
+
+.source.selected {
+	color: var(--color-white);
+	cursor: default;
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Messages Styles -------------------------------- */
+
+.message {
+	z-index: 999999;
+	padding: 1rem;
+	width: 100%;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	border-radius: 8px;
+	color: var(--color-white);
+	background-color: var(--color-bg);
+	border: 1px solid var(--color-border);
+	animation: Reveal 0.3s ease forwards;
+}
+
+.message p {
+	margin: 0;
+}
+.message b,
+.message a {
+	font-weight: bold;
+	color: var(--color-white);
+}
+
+.message.warning {
+	color: var(--color-warning-text);
+	border-color: var(--color-warning-border);
+	background-color: var(--color-warning-bg);
+}
+
+.message.error {
+	color: var(--color-error-text);
+	border-color: var(--color-error-border);
+	background-color: var(--color-error-bg);
+}
+
+/* Background Styles -------------------------------- */
+
+#background {
+	position: fixed;
+	z-index: 0;
+	opacity: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	transform: scale(1.75) rotate(-8deg);
+	background-repeat: repeat;
+	background-position: center;
+	background-size: 256px 256px;
+	background-image: url(../assets/pattern.webp);
+	transition: opacity 2s ease, transform 1s ease;
+	animation: InfiniteBackground 30s linear infinite;
+}
+
+#background.visible {
+	opacity: 0.3;
+	transform: scale(1.5) rotate(-8deg);
+}
+
+/* Animations -------------------------------- */
+
+@keyframes Reveal {
+	0% {
+		opacity: 0;
+		transform: translateY(0.5rem);
+	}
+
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes InfiniteBackground {
+	0% {
+		background-position: 0 0;
+	}
+
+	100% {
+		background-position: 256px 256px;
+	}
+}
+
+/* Responsive media queries Styles -------------------------------- */
+
+@media screen and (max-width: 800px), screen and (max-height: 800px) {
+	:root {
+		font-size: 13px;
+	}
+
+	body {
+		align-items: flex-start;
+	}
+
+	#container {
+		height: 100%;
+		max-width: none;
+		justify-content: flex-start;
+	}
+
+	#player {
+		height: 100%;
+	}
+
+	#background {
+		animation: none;
+		background-size: 200px 200px;
+	}
+
+	#content {
+		height: 100%;
+		aspect-ratio: unset;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	:root {
+		font-size: 11px;
+	}
+
+	#background {
+		display: none;
+	}
+}

@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="assets/favicon.png">
+    <title>Tape Operator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Anonymously track page views with Plausible Analytics -->
+    <script defer data-domain="tapeoperator.surge.sh" src="https://analytics.kirlovon.dev/js/script.manual.js"></script>
+</head>
+
+<body>
+    <div id="container">
+
+        <!-- Player window -->
+        <div id="player">
+            <div id="header">
+                <div id="title"></div>
+                <div id="logo">
+                    <img src="assets/logo.svg" alt="Tape Operator Logo">
+                </div>
+            </div>
+            <div id="content">
+                <img src="assets/loading.svg" alt="Loading...">
+            </div>
+            <div id="sources"></div>
+            <div id="footer">
+                <div>
+                    Made with ♥ by <a href="https://github.com/Kirlovon" target="_blank">Kirlovon</a>.
+                    Powered by <a href="https://github.com/Kirlovon/Tape-Operator" target="_blank">Tape Operator</a>.
+                </div>
+                <div>
+                    <a href="https://github.com/Kirlovon/Tape-Operator/issues" target="_blank">Bug Report ↗</a>
+                    <span id="version">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Infinite background -->
+    <div id="background"></div>
+
+    <!-- Templates -->
+    <template id="initialization-error-message">
+        <div class="message error">
+            <p>
+                Произошла ошибка во время инициализации плеера. Проверьте консоль разработчика и сообщите об ошибке по <a href="https://github.com/Kirlovon/Tape-Operator/issues">этой ссылке ↗</a>.
+                Я постараюсь быстро все исправить! 🙂
+            </p>
+        </div>
+    </template>
+
+    <template id="script-error-message">
+        <div class="message error">
+            <p>
+                Похоже что плеер так и не был инициализирован. Проверьте, установлена ли у вас актуальная версия скрипта <a href="https://github.com/Kirlovon/Tape-Operator">Tape Operator ↗</a>.
+            </p>
+        </div>
+    </template>
+
+    <template id="script-outdated-message">
+        <div class="message warning">
+            <p>
+                Похоже, что у вас установлена устаревшая версия скрипта - <b class="script-version"></b>.
+                Рекомендуем обновить скрипт, перейдя по <a href="https://github.com/Kirlovon/Tape-Operator/raw/master/tape-operator.user.js">этой ссылке ↗</a>.
+            </p>
+        </div>
+    </template>
+
+    <!-- Player code -->
+    <script src="config.js"></script>
+    <script src="utils.js"></script>
+    <script src="player.js"></script>
+</body>
+
+</html>
