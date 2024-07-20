@@ -5,7 +5,7 @@
 :root {
 	--color-white: white;
 	--color-grey: #7e7e7e;
-	--color-border: #303030;
+	--color-border: #404040;
 	--color-bg: #0d0d0d;
 	--color-warning-text: #ffeed6;
 	--color-warning-border: #ff9800;
@@ -73,7 +73,7 @@ a:focus {
 	height: fit-content;
 	min-height: 512px;
 	max-width: 722px; /* 720px + left & right borders */
-	filter: drop-shadow(0 16px 32px var(--color-bg)) drop-shadow(0 4px 8px var(--color-bg));
+	filter: drop-shadow(0 0 16px var(--color-bg));
 }
 
 /* Player Styles -------------------------------- */
