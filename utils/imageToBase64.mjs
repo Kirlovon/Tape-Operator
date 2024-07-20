@@ -4,10 +4,7 @@ import { extname, resolve } from 'node:path';
 const dirname = new URL('.', import.meta.url).pathname;
 
 function convertImageToBase64(imagePath) {
-	// Read the image file
 	const imageData = readFileSync(imagePath);
-
-	// Convert to base64
 	const base64Image = imageData.toString('base64');
 
 	// Determine the MIME type (assuming the file extension is correct)

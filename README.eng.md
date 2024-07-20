@@ -1,6 +1,6 @@
 ![Image](/assets/poster.webp)
 
-With this script, [IMDB](https://www.imdb.com/), [TMDB](https://www.themoviedb.org/), [Kinopoisk](https://www.kinopoisk.ru/), and [Letterboxd](https://letterboxd.com/) will become free online cinemas! On every movie or TV show page, a banner will appear in the top left corner. Clicking on it will open a player with the movie.
+With this script, [IMDB](https://www.imdb.com/), [TMDB](https://www.themoviedb.org/), [Kinopoisk](https://www.kinopoisk.ru/), and [Letterboxd](https://letterboxd.com/) will become free online cinemas! On every movie or TV show page, a flag will appear in the top left corner. Clicking on it will open a player with the movie.
 
 [RUS](README.md) | **ENG**
 
@@ -48,13 +48,13 @@ In case the link to the player is blocked in your country, you can deploy your o
 
 3. Install the edited script.
 
-> Self-hosting does not guarantee 100% site functionality as it is based on the [Kinobox](https://kinobox.tv/) player, which currently cannot be self-deployed.
+> Self-hosting does not guarantee 100% site functionality as it is based on the [Kinobox API](https://kinobox.tv/), which currently cannot be self-hosted.
 
 <br>
 
 ## Disclaimer
 
-The script operates based on the [Kinobox.tv](https://kinobox.tv/) player and is provided solely for informational purposes!
+The script operates based on the [Kinobox API](https://kinobox.tv/) and is provided solely for informational purposes!
 
 This project does not store or distribute pirate content. All rights to the materials belong to their rightful owners. For the removal of illegal content, please contact the original source. I do not take responsibility for content posted on third-party sites.
 
