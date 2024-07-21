@@ -52,7 +52,7 @@ async function init(data, scriptVersion) {
 		// Update title and send analytics
 		if (movieData?.title) {
 			setTitle(movieData.title);
-			sendAnalytics(movieData, scriptVersion);
+			sendAnalytics(movieData);
 		}
 
 		// Check player version if provided
@@ -253,22 +253,20 @@ function showPlayerText(messageText) {
 }
 
 /**
- * Send analytics data. Sends only id type, script version, movie title & preferred video source.
+ * Send analytics data. Sends only id type, movie title & preferred video source.
  * @param {MovieData} movieData
- * @param {string} scriptVersion
  */
-function sendAnalytics(movieData, scriptVersion) {
+function sendAnalytics(movieData) {
 	if (typeof plausible === 'function') {
 		try {
 			const title = movieData.title?.trim()?.toLowerCase();
 			if (!title) return;
 
 			const idType = Object.keys(movieData).filter((key) => key !== 'title')?.at(0)?.toLowerCase();
-			const preferredSource = localStorage.getItem('preferred-source');
+			const preferredSource = localStorage.getItem('preferred-source')?.toLowerCase();
 
 			let props = {};
 			if (idType) props['id-type'] = idType;
-			if (scriptVersion) props['script-version'] = scriptVersion;
 			if (preferredSource) props['preferred-source'] = preferredSource;
 
 			plausible('pageview', { u: title, props: props });
