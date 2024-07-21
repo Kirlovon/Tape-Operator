@@ -1,8 +1,7 @@
-// True if globalThis.init function was called
+// True if globalThis.init function was successfully called
 let initialized = false;
 
 const containerElement = document.getElementById('container');
-
 const playerElement = document.getElementById('player');
 const titleElement = document.getElementById('title');
 const versionElement = document.getElementById('version');
@@ -29,12 +28,12 @@ async function init(data, scriptVersion) {
 		initialized = true;
 
 		// Remove old messages
-		removeMessages();
+		containerElement.querySelectorAll('.message').forEach((element) => element.remove());
 
 		// Validate and clean movie data
 		const movieData = parseMovieData(data);
 
-		logger.info(`Initialization started`, data);
+		logger.info('Initialization started', movieData);
 
 		// Cache movie data and set search param to allow page refresh and bookmarking
 		const key = cacheMovieData(movieData);
@@ -98,7 +97,7 @@ async function fetchSources(movieData) {
 
 /**
  * Update list of available sources
- * @param {object[]} sourcesData Players sources data
+ * @param {object[]} sourcesData
  */
 function setSources(sourcesData) {
 
@@ -142,7 +141,7 @@ function setSources(sourcesData) {
 
 /**
  * Select source to display in the player
- * @param {object} sourceData Player source data
+ * @param {object} sourceData
  */
 function selectSource(sourceData) {
 	const iframe = document.createElement('iframe');
@@ -216,13 +215,6 @@ function parseMovieData(data) {
 }
 
 /**
- * Remove all messages from the container
- */
-function removeMessages() {
-	containerElement.querySelectorAll('.message').forEach((element) => element.remove());
-}
-
-/**
  * Show initialization error message
  */
 function showInitializationErrorMessage() {
@@ -261,20 +253,25 @@ function showPlayerText(messageText) {
 }
 
 /**
- * Send analytics data.
- * Sends only movie title and source.
- * @param {MovieData} movieData Movie data
- * @param {string} version Script version
- * @param {boolean} isError If true, the event is an error
+ * Send analytics data. Sends only id type, script version, movie title & preferred video source.
+ * @param {MovieData} movieData
+ * @param {string} scriptVersion
  */
 function sendAnalytics(movieData, scriptVersion) {
 	if (typeof plausible === 'function') {
 		try {
-			const idType = Object.keys(movieData).filter((key) => key !== 'title')?.at(0)?.toLowerCase();
 			const title = movieData.title?.trim()?.toLowerCase();
+			if (!title) return;
+
+			const idType = Object.keys(movieData).filter((key) => key !== 'title')?.at(0)?.toLowerCase();
 			const preferredSource = localStorage.getItem('preferred-source');
 
-			if (title) plausible('pageview', { u: title, props: { idType, preferredSource, scriptVersion } });
+			let props = {};
+			if (idType) props['id-type'] = idType;
+			if (scriptVersion) props['script-version'] = scriptVersion;
+			if (preferredSource) props['preferred-source'] = preferredSource;
+
+			plausible('pageview', { u: title, props: props });
 		} catch (error) {
 			logger.error('Analytics error', error);
 		}
@@ -316,6 +313,9 @@ function setup() {
 
 // Display player version
 versionElement.innerHTML = `v${REQUIRED_VERSION}`;
+
+// Reveal container
+containerElement.classList.add('visible');
 
 // Make init function available for external use
 globalThis.init = init;
