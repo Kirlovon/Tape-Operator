@@ -16,7 +16,7 @@ With this script, [IMDB](https://www.imdb.com/), [TMDB](https://www.themoviedb.o
     - [Userscripts](https://github.com/quoid/userscripts)
 
 2. Enable [developer mode in your browser](https://www.tampermonkey.net/faq.php#Q209).
-3. Install the script by following [this link](https://github.com/Kirlovon/Tape-Operator/raw/master/tape-operator.user.js). _(or download `tape-operator.user.js` and install manually)_
+3. Install the script by following [this link](https://github.com/Kirlovon/Tape-Operator/raw/main/tape-operator.user.js). _(or download `tape-operator.user.js` and install manually)_
 
 Done! Now open a movie page _([example](https://letterboxd.com/film/babylon-2022/))_ and click on the flag in the top left corner!
 
@@ -64,4 +64,4 @@ This project does not store or distribute pirate content. All rights to the mate
 
 ## License
 
-MIT _([LICENSE](https://github.com/Kirlovon/Tape-Operator/blob/master/LICENSE) file)_
+MIT _([LICENSE](https://github.com/Kirlovon/Tape-Operator/blob/main/LICENSE) file)_
