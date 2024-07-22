@@ -6,11 +6,13 @@ body {
 	margin: 0;
 	padding: 2em;
 	width: 100%;
-	height: 100dvh;
+	min-height: 100dvh;
 	font-size: 16px;
 	display: flex;
+	flex-direction: column;
 	color: white;
-	overflow: hidden;
+	overflow-y: auto;
+	overflow-x: hidden;
 	color-scheme: dark;
 	align-items: center;
 	justify-content: center;
@@ -82,6 +84,37 @@ a:hover {
 	display: flex;
 	height: 100%;
 	width: 100%;
+}
+
+#deprecation {
+	z-index: 999999999;
+	display: flex;
+	flex-direction: column;
+	padding: 1rem;
+	gap: 1rem;
+	width: 100%;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	max-width: 700px;
+	margin-top: 1rem;
+	border-radius: 8px;
+	border: 1px solid #db7821;
+	background-color: #251302;
+	opacity: 0;
+	animation-name: WrapperReveal;
+	animation-fill-mode: forwards;
+	animation-duration: 0.5s;
+	animation-delay: 0.5s;
+}
+
+#deprecation a,
+#deprecation b {
+	color: white;
+}
+
+#deprecation p {
+	color: #db7821;
+	margin: 0;
 }
 
 #logo {
@@ -180,13 +213,13 @@ a:hover {
 	0% {
 		opacity: 0;
 		filter: blur(8px);
-		transform: scale(1.1);
+		transform: translateY(2rem);
 	}
 
 	100% {
 		opacity: 1;
 		filter: blur(0px);
-		transform: scale(1);
+		transform: translateY(0);
 	}
 }
 

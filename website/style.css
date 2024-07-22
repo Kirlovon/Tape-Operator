@@ -1,191 +1,217 @@
 :root {
-    color-scheme: dark;
+	color-scheme: dark;
 }
 
 * {
-    box-sizing: border-box;
-    line-height: 1.5rem;
-    font-size: 1rem;
-    padding: 0;
-    margin: 0;
+	box-sizing: border-box;
+	line-height: 1.5rem;
+	font-size: 1rem;
+	padding: 0;
+	margin: 0;
 }
 
 body {
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    opacity: 1;
-    width: 100%;
-    height: auto;
-    color: #bababa;
-    overflow-x: hidden;
-    background-color: #080808;
-    font-family: 'Inter', system-ui, sans-serif;
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	opacity: 1;
+	width: 100%;
+	height: auto;
+	color: #bababa;
+	overflow-x: hidden;
+	background-color: #080808;
+	font-family: 'Inter', system-ui, sans-serif;
 }
 
 a {
-    cursor: pointer;
-    color: white;
-    text-decoration: none;
-    text-underline-offset: 4px;
+	cursor: pointer;
+	color: white;
+	text-decoration: none;
+	text-underline-offset: 4px;
 }
 
 a:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 h1,
 h2,
 h3 {
-    color: white;
-    padding-bottom: 1rem;
-    text-shadow: 0 0 32px #ffffff4d;
+	color: white;
+	padding-bottom: 1rem;
+	text-shadow: 0 0 32px #ffffff4d;
 }
 
 ol {
-    list-style-position: inside;
-    padding-left: 0;
+	list-style-position: inside;
+	padding-left: 0;
 }
 
 ol li {
-    padding: 0.25rem 0;
-    padding-left: 1rem;
+	padding: 0.25rem 0;
+	padding-left: 1rem;
 }
 
 p {
-    font-weight: 300;
+	font-weight: 300;
 }
 
 b {
-    color: white;
+	color: white;
 }
 
 blockquote {
-    padding: 1rem 0;
-    padding-bottom: 0;
-    opacity: 1;
+	padding: 1rem 0;
+	padding-bottom: 0;
+	opacity: 1;
 }
 
 .container {
-    display: block;
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2rem;
-    padding: 0 2rem;
+	display: block;
+	width: 100%;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 2rem;
+	padding: 0 2rem;
 }
 
-.installation {
-    position: relative;
-    padding: 1.5rem;
-    margin: 4rem 0;
-    background-color: #080808;
-    border: 1px solid #303030;
-    border-radius: 8px;
+.installation,
+.deprecation {
+	position: relative;
+	padding: 1.5rem;
+	background-color: #080808;
+	border: 1px solid #303030;
+	border-radius: 8px;
+}
+
+.deprecation {
+	border: 1px solid #db7821;
+	background-color: #251302;
+}
+
+.deprecation > * {
+	text-shadow: none;
+	color: #db7821;
+}
+
+.deprecation h2 {
+	color: white;
+	padding-bottom: 0;
+}
+
+.deprecation p {
+	padding-block-start: 1rem;
+}
+
+.deprecation b,
+.deprecation a {
+	color: white;
 }
 
 .installation img {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    width: 2rem;
-    height: 2rem;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 0 0.5rem #3030307d);
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	width: 2rem;
+	height: 2rem;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	filter: drop-shadow(0 0 0.5rem #3030307d);
 }
 
 .installation a,
+.warning a,
 .question a {
-    color: #ffffff;
-    text-shadow: 0 0 4px #3030307d;
+	color: #ffffff;
+	text-shadow: 0 0 4px #3030307d;
 }
 
 .question {
-    margin-bottom: 2rem;
+	margin-bottom: 2rem;
 }
 
 .question p {
-    color: #7a7a7a;
+	color: #7a7a7a;
 }
 
 .title-image {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    margin-top: 6rem;
-    margin-bottom: 3rem;
-    user-select: none;
-    pointer-events: none;
-    border: 1px solid #303030;
-    border-radius: 8px;
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+	margin-top: 6rem;
+	margin-bottom: 3rem;
+	user-select: none;
+	pointer-events: none;
+	border: 1px solid #303030;
+	border-radius: 8px;
 }
 
 .faq-title {
-    width: 100%;
-    margin-bottom: 16px;
-    border-bottom: 1px solid #303030;
+	width: 100%;
+	margin-bottom: 16px;
+	border-bottom: 1px solid #303030;
 }
 
 #github {
-    cursor: pointer;
-    opacity: 0.5;
-    margin: 0 auto;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    text-align: center;
-    transition: opacity 0.1s ease;
+	cursor: pointer;
+	opacity: 0.5;
+	margin: 0 auto;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	text-align: center;
+	transition: opacity 0.1s ease;
 }
 
 #github:hover {
-    opacity: 1;
+	opacity: 1;
 }
 
 #github img {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 1rem;
-    filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.5));
+	width: 32px;
+	height: 32px;
+	margin-bottom: 1rem;
+	filter: drop-shadow(0 0 0.5rem rgba(255, 255, 255, 0.5));
 }
 
 .github-link:hover {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .info {
-    display: block;
-    width: 100%;
-    margin-bottom: 4rem;
-    line-height: 5em;
-    white-space: nowrap;
-    color: #7e7e7e;
-    font-size: 0.8rem;
-    user-select: none;
-    text-align: center;
+	display: block;
+	width: 100%;
+	margin-bottom: 4rem;
+	line-height: 5em;
+	white-space: nowrap;
+	color: #7e7e7e;
+	font-size: 0.8rem;
+	user-select: none;
+	text-align: center;
 }
 
 .info a {
-    color: white;
-    font-size: 0.8rem;
+	color: white;
+	font-size: 0.8rem;
 }
 
 @media (max-width: 800px) {
-    .title-image {
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-    }
+	.title-image {
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+	}
 
-    .installation {
-        margin: 2rem 0;
-    }
+	.installation,
+	.deprecation {
+		margin: 2rem 0;
+	}
 }
 
 @media (max-width: 400px) {
-    .installation img {
-        display: none;
-    }
+	.installation img {
+		display: none;
+	}
 }

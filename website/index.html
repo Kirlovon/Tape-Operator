@@ -27,12 +27,31 @@
 	</section>
 
 	<section class="container">
+		<div class="deprecation">
+			<h2>Важная информация!</h2>
+
+			<p>
+				Kinopoisk Watch больше не будет обновляться, а сайт и плеер перестанут работать после <b>01.01.2025</b>. До этой даты вы можете продолжать пользоваться текущей версией скрипта.
+			</p>
+
+			<p>
+				Не переживайте, я разработал новую версию. Она поддерживает больше плееров, а также работает с такими сайтами, как <b>IMDB</b>, <b>TheMovieDB</b>, <b>Letterboxd</b> и
+				<b>Kinopoisk!</b>
+			</p>
+
+			<p>
+				Чтобы продолжить бесплатно смотреть фильмы, советую удалить старый скрипт и установить новый, доступный по этой ссылке: <a href="https://github.com/kirlovon/tape-operator">Tape Operator ↗</a>
+			</p>
+		</div>
+	</section>
+
+	<section class="container">
 		<div class="installation">
 			<img src="tutorial-icon.svg" alt="Tutorial icon" />
 
 			<h2>Как установить?</h2>
 			<ol>
-				<li>Установите расширение <a href="https://www.tampermonkey.net/" target="_blank">Tampermonkey↗</a> для своего браузера.</li>
+				<li>Установите расширение <a href="https://www.tampermonkey.net/" target="_blank">Tampermonkey ↗</a> для своего браузера.</li>
 				<li>Установите скрипт <a href="https://github.com/Kirlovon/Kinopoisk-Watch/raw/master/kinopoisk-watch.user.js">по этой ссылке↗</a>.</li>
 			</ol>
 
@@ -95,17 +114,6 @@
 	<section class="info">
 		Made with ♥ by <a href="https://github.com/Kirlovon" target="_blank">Kirlovon</a>.
 	</section>
-
-	<script>
-
-		// Redirect for legacy script versions
-		const params = new URLSearchParams(window.location.search);
-		let id = params.get('id') || window.location.hash.replace(/\D/g, '');
-
-		if (id) {
-			window.location.replace(`https://kinopoisk-watch.org/player/?id=${id}`);
-		}
-	</script>
 </body>
 
 </html>
