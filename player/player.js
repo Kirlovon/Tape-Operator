@@ -119,7 +119,7 @@ function setSources(sourcesData) {
 		}
 
 		// Smooth reveal animation
-		sourceElement.style.animationDelay = `${(sourcesData.length - index) * 0.05}s`;
+		sourceElement.style.animationDelay = `${(12 + (sourcesData.length - index)) * 0.05}s`;
 
 		// Select source on click
 		sourceElement.addEventListener('click', () => {
@@ -296,7 +296,10 @@ function setup() {
 
 		// Get movie data from cache
 		const cachedData = localStorage.getItem(movieKey);
-		if (!cachedData) return;
+		if (!cachedData) {
+			logger.error(`Cached data with key "${movieKey}" not found`);
+			return;
+		}
 
 		// Parse movie data object
 		const movieData = JSON.parse(cachedData);
@@ -312,8 +315,8 @@ function setup() {
 // Display player version
 versionElement.innerHTML = `v${REQUIRED_VERSION}`;
 
-// Reveal container
-containerElement.classList.add('visible');
+// Reveal body
+document.body.classList.add('visible');
 
 // Make init function available for external use
 globalThis.init = init;
