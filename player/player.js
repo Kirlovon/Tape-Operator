@@ -85,12 +85,12 @@ async function fetchSources(movieData) {
 
 	// Send request to the API
 	const request = await fetch(apiURL);
-	if (!request.ok) throw new Error(`Request failed with status ${request?.status}`);
+	if (!request.ok || request?.status !== 200) throw new Error(`Request failed with status ${request.status}`);
 
 	let playersData = await request.json();
 
 	// Remove players without full data
-	playersData = playersData.filter((player) => player.iframeUrl && player.success && player.source);
+	playersData = playersData.filter((player) => player?.iframeUrl && player?.success && player?.source);
 
 	return playersData;
 }
