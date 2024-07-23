@@ -262,7 +262,7 @@ function sendAnalytics(movieData) {
 			const title = movieData.title?.trim()?.toLowerCase();
 			if (!title) return;
 
-			const idType = Object.keys(movieData).filter((key) => key !== 'title')?.at(0)?.toLowerCase();
+			const idType = Object.keys(movieData).find((key) => ['imdb', 'kinopoisk', 'tmdb'].includes(key));
 			const preferredSource = localStorage.getItem('preferred-source')?.toLowerCase();
 
 			let props = {};
