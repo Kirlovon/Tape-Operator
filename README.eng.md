@@ -17,7 +17,7 @@ With this script, [IMDB](https://www.imdb.com/), [TMDB](https://www.themoviedb.o
 
 2. Enable [developer mode in your browser](https://www.tampermonkey.net/faq.php?locale=ru#Q209).
 
-3. Install the script by going to [this link](https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js). _(or download _`tape-operator.user.js`_ and install manually)_
+3. Install the script by going to [this link](https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js). _(or download `tape-operator.user.js` from folder `userscript`) and install manually)_
 
 Done, now open a page with a movie _([example](https://letterboxd.com/film/babylon-2022/))_ and click on the flag in the upper left corner!
 
@@ -41,7 +41,7 @@ In case the link to the player is blocked in your country, you can deploy your o
     - Replace the `PLAYER_URL` variable with the link to your site.
     - Add a line with the link to your site in the `@match` header. This is necessary for the browser to execute the script on your player page.
     - Remove the `@updateURL` and `@downloadURL` headers from the file so that the script doesn't try to update itself.
-    - Make sure that the version in the `@version` header is equal to or not lower than the version specified in the `player.js` file, in the `REQUIRED_VERSION` variable. Otherwise, there will be a notification about an outdated script on the site.
+    - Make sure that the version in the `@version` header is equal to or not lower than the version specified in the `config.js` file, in the `REQUIRED_VERSION` variable. Otherwise, there will be a notification about an outdated script on the site.
 
 3. Install the edited script.
 
