@@ -1,5 +1,5 @@
 // Latest required script version
-const REQUIRED_VERSION = '3.0.0';
+const REQUIRED_VERSION = '3.0.1';
 
 // URL to Kinobox API
 const KINOBOX_API = 'https://kinobox.tv/api/players';

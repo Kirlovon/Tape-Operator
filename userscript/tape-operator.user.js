@@ -3,7 +3,7 @@
 // @namespace       tape-operator
 // @author          Kirlovon
 // @description     Watch movies on IMDB, TMDB, Kinopoisk and Letterboxd!
-// @version         3.0.0
+// @version         3.0.1
 // @icon            https://github.com/Kirlovon/Tape-Operator/raw/main/assets/favicon.png
 // @updateURL       https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js
 // @downloadURL     https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js
@@ -14,7 +14,7 @@
 // @grant           GM.openInTab
 // @grant           GM.deleteValue
 // @match           *://www.kinopoisk.ru/*
-// @match           *://www.imdb.com/title/*
+// @match           *://*.imdb.com/title/*
 // @match           *://www.themoviedb.org/movie/*
 // @match           *://www.themoviedb.org/tv/*
 // @match           *://letterboxd.com/film/*
@@ -153,6 +153,12 @@
 			// Remove title attachment from IMDB
 			if (title.includes('⭐')) {
 				return title.split('⭐').at(0).trim();
+			}
+
+			// Any other IMDB attachment
+			if (title.endsWith('- IMDb') && title.includes(')')) {
+				const lastParenthesisIndex = title.lastIndexOf(')');
+				return title.slice(0, lastParenthesisIndex + 1).trim();
 			}
 
 			return title;
