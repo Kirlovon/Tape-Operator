@@ -84,7 +84,7 @@ async function fetchSources(movieData) {
 	apiURL.searchParams.set('sources', SOURCES);
 
 	// Send request to the API
-	const request = await fetch(apiURL);
+	const request = await fetch(apiURL, { method: 'GET', referrerPolicy: 'no-referrer' });
 	if (!request.ok || request?.status !== 200) throw new Error(`Request failed with status ${request.status}`);
 
 	let playersData = await request.json();
@@ -119,7 +119,7 @@ function setSources(sourcesData) {
 		}
 
 		// Smooth reveal animation
-		sourceElement.style.animationDelay = `${(12 + (sourcesData.length - index)) * 0.05}s`;
+		sourceElement.style.animationDelay = `${(5 + (sourcesData.length - index)) * 0.05}s`;
 
 		// Select source on click
 		sourceElement.addEventListener('click', () => {
