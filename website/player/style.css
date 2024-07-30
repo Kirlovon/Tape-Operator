@@ -48,7 +48,7 @@ a:hover {
 	animation-name: WrapperReveal;
 	animation-fill-mode: forwards;
 	animation-duration: 0.5s;
-	animation-delay: 0.5s;
+	animation-delay: 1s;
 }
 
 .header,
