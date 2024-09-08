@@ -3,7 +3,7 @@
 // @namespace       tape-operator
 // @author          Kirlovon
 // @description     Watch movies on IMDB, TMDB, Kinopoisk and Letterboxd!
-// @version         3.0.1
+// @version         3.1.0
 // @icon            https://github.com/Kirlovon/Tape-Operator/raw/main/assets/favicon.png
 // @updateURL       https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js
 // @downloadURL     https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js
@@ -38,7 +38,7 @@
 	// URL Matchers
 	const KINOPOISK_MATCHER = /kinopoisk\.ru\/(film|series)\/.*/;
 	const IMDB_MATCHER = /imdb\.com\/title\/tt\.*/;
-	const TMDB_MATCHER = /themoviedb\.org\/movie\/\.*/;
+	const TMDB_MATCHER = /themoviedb\.org\/(movie|tv)\/\.*/;
 	const LETTERBOXD_MATCHER = /letterboxd\.com\/film\/\.*/;
 	const MATCHERS = [KINOPOISK_MATCHER, IMDB_MATCHER, TMDB_MATCHER, LETTERBOXD_MATCHER];
 
@@ -64,7 +64,7 @@
 	 * Update banner based on the current movie data on page
 	 */
 	function updateBanner() {
-		const url = location.href;
+		const url = getCurrentURL();
 
 		// Skip to prevent unnecessary updates
 		if (url === previousUrl) return;
@@ -86,7 +86,7 @@
 	 * Extract movie data from the page
 	 */
 	function extractMovieData() {
-		const url = location.href;
+		const url = getCurrentURL();
 
 		// Movie title
 		const title = extractTitle();
@@ -133,6 +133,14 @@
 		}
 
 		return null;
+	}
+
+	/**
+	 * Get current URL.
+	 * @returns {string} Current url without query parameters and hashes.
+	 */
+	function getCurrentURL() {
+		return location.origin + location.pathname;
 	}
 
 	/**
