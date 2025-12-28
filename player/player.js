@@ -319,6 +319,21 @@ function setup() {
 	try {
 		logger.info('Setup started');
 
+		// First, check for direct data parameter (used by LAMPA plugin)
+		const directData = getSearchParam('data');
+		if (directData) {
+			try {
+				const movieData = JSON.parse(directData);
+				if (typeof movieData === 'object' && movieData !== null) {
+					logger.info('Direct data from URL:', movieData);
+					init(movieData);
+					return;
+				}
+			} catch (parseError) {
+				logger.error('Failed to parse direct data:', parseError);
+			}
+		}
+
 		// Get cached movie key from URL
 		const movieKey = getSearchParam('movie');
 		if (!movieKey) return;

@@ -25,6 +25,21 @@ Done, now open a page with a movie _([example](https://letterboxd.com/film/babyl
 
 <br>
 
+## LAMPA
+
+For users of the [LAMPA](https://github.com/yumata/lampa) application, a plugin is available that adds the ability to watch movies via Tape Operator.
+
+### LAMPA Plugin Installation
+
+1. Open LAMPA settings
+2. Go to the "Plugins" section
+3. Add the plugin URL: `https://kirlovon.github.io/Tape-Operator/lampa/tape-operator.js`
+4. Restart the application
+
+After installing the plugin, a "Tape Operator" button will appear on the movie page, and "Watch in Tape Operator" option will be available in the context menu (long press on the card).
+
+<br>
+
 ## Disclaimer
 
 The project does not store or distribute pirated content. All rights to the materials belong to their rightful owners. To remove illegal content, please contact the original source. I am not responsible for the content posted on third-party resources.
