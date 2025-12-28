@@ -32,7 +32,7 @@
 
 1. Откройте настройки LAMPA
 2. Перейдите в раздел "Плагины"
-3. Добавьте ссылку на плагин: `https://kirlovon.github.io/Tape-Operator/lampa/tape-operator.js`
+3. Добавьте ссылку на плагин: `https://github.com/Kirlovon/Tape-Operator/raw/main/lampa/tape-operator.js`
 4. Перезапустите приложение
 
 После установки плагина, на странице фильма появится кнопка "Tape Operator", а в контекстном меню (долгое нажатие на карточку) будет доступен пункт "Смотреть в Tape Operator".

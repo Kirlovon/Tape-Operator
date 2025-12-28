@@ -33,7 +33,7 @@ For users of the [LAMPA](https://github.com/yumata/lampa) application, a plugin 
 
 1. Open LAMPA settings
 2. Go to the "Plugins" section
-3. Add the plugin URL: `https://kirlovon.github.io/Tape-Operator/lampa/tape-operator.js`
+3. Add the plugin URL: `https://github.com/Kirlovon/Tape-Operator/raw/main/lampa/tape-operator.js`
 4. Restart the application
 
 After installing the plugin, a "Tape Operator" button will appear on the movie page, and "Watch in Tape Operator" option will be available in the context menu (long press on the card).

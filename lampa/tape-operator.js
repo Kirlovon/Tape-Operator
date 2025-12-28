@@ -3,7 +3,7 @@
  * Opens movies in the Tape Operator player
  *
  * Installation:
- * Add this URL to LAMPA plugins: https://kirlovon.github.io/Tape-Operator/lampa/tape-operator.js
+ * Add this URL to LAMPA plugins: https://github.com/Kirlovon/Tape-Operator/raw/main/lampa/tape-operator.js
  */
 (function () {
     'use strict';
