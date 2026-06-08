@@ -24,6 +24,9 @@
 // @match           *://www.betaseries.com/*/show/*
 // @match           *://www.betaseries.com/*/movie/*
 // @match           *://www.betaseries.com/*/episode/*
+// @match           *://www.betaseries.com/serie/*
+// @match           *://www.betaseries.com/film/*
+// @match           *://www.betaseries.com/episode/*
 // @match           *://tapeop.dev/*
 // ==/UserScript==
 
@@ -48,7 +51,9 @@
 	const TMDB_MATCHER = /themoviedb\.org\/(movie|tv)\/\.*/;
 	const LETTERBOXD_MATCHER = /letterboxd\.com\/film\/\.*/;
 	const BETASERIES_MATCHER = /betaseries\.com\/[a-z-]+\/(show|movie|episode)\/.+/;
-	const MATCHERS = [KINOPOISK_MATCHER, IMDB_MATCHER, TMDB_MATCHER, LETTERBOXD_MATCHER, BETASERIES_MATCHER];
+	const BETASERIES_MATCHER_FR = /betaseries\.com\/(serie|film|episode)\/.+/;
+	const MATCHERS = [KINOPOISK_MATCHER, IMDB_MATCHER, TMDB_MATCHER,
+		LETTERBOXD_MATCHER, BETASERIES_MATCHER, BETASERIES_MATCHER_FR];
 
 	// Logging utility
 	const logger = {
@@ -145,7 +150,7 @@
 		}
 
 		// IMDB ID from Letterboxd or BetaSeries
-		if (url.match(LETTERBOXD_MATCHER) || url.match(BETASERIES_MATCHER)) {
+		if (url.match(LETTERBOXD_MATCHER) || url.match(BETASERIES_MATCHER) || url.match(BETASERIES_MATCHER_FR)) {
 			const elements = document.querySelectorAll('a');
 			const elementsArray = Array.from(elements);
 
