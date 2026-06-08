@@ -21,6 +21,9 @@
 // @match           *://www.themoviedb.org/movie/*
 // @match           *://www.themoviedb.org/tv/*
 // @match           *://letterboxd.com/film/*
+// @match           *://www.betaseries.com/*/show/*
+// @match           *://www.betaseries.com/*/movie/*
+// @match           *://www.betaseries.com/*/episode/*
 // @match           *://tapeop.dev/*
 // ==/UserScript==
 
@@ -44,7 +47,8 @@
 	const IMDB_MATCHER = /imdb\.com\/title\/tt\.*/;
 	const TMDB_MATCHER = /themoviedb\.org\/(movie|tv)\/\.*/;
 	const LETTERBOXD_MATCHER = /letterboxd\.com\/film\/\.*/;
-	const MATCHERS = [KINOPOISK_MATCHER, IMDB_MATCHER, TMDB_MATCHER, LETTERBOXD_MATCHER];
+	const BETASERIES_MATCHER = /betaseries\.com\/[a-z-]+\/(show|movie|episode)\/.+/;
+	const MATCHERS = [KINOPOISK_MATCHER, IMDB_MATCHER, TMDB_MATCHER, LETTERBOXD_MATCHER, BETASERIES_MATCHER];
 
 	// Logging utility
 	const logger = {
@@ -140,8 +144,8 @@
 			return { tmdb: id, title };
 		}
 
-		// IMDB ID from Letterboxd
-		if (url.match(LETTERBOXD_MATCHER)) {
+		// IMDB ID from Letterboxd or BetaSeries
+		if (url.match(LETTERBOXD_MATCHER) || url.match(BETASERIES_MATCHER)) {
 			const elements = document.querySelectorAll('a');
 			const elementsArray = Array.from(elements);
 
@@ -179,6 +183,13 @@
 	 */
 	function extractTitle() {
 		try {
+			// BetaSeries: prefer the h1 title element over the og:title meta tag
+			const betaseriesTitle = document.querySelector('h1.blockInformations__title');
+			if (betaseriesTitle) {
+				const title = betaseriesTitle.textContent?.trim();
+				if (title) return title;
+			}
+
 			const titleElement = document.querySelector('meta[property="og:title"]') || document.querySelector('meta[name="twitter:title"]');
 			if (!titleElement) return null;
 
