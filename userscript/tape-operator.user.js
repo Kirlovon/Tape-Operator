@@ -2,7 +2,7 @@
 // @name            Tape Operator
 // @namespace       tape-operator
 // @author          Kirlovon
-// @description     Watch movies on IMDB, TMDB, Kinopoisk and Letterboxd!
+// @description     Watch movies on IMDB, TMDB, Kinopoisk, Letterboxd and BetaSeries!
 // @version         3.3.3
 // @icon            https://github.com/Kirlovon/Tape-Operator/raw/main/assets/favicon.png
 // @updateURL       https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js

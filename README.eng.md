@@ -1,6 +1,6 @@
 ![Image](/assets/poster.webp)
 
-With this script, [IMDB](https://www.imdb.com/), [TMDB](https://www.themoviedb.org/), [Kinopoisk](https://www.kinopoisk.ru/) and [Letterboxd](https://letterboxd.com/) will become free online cinemas! On each page with a movie or TV series, a flag will appear in the upper left corner. By clicking on it, you will open a player with the movie.
+With this script, [IMDB](https://www.imdb.com/), [TMDB](https://www.themoviedb.org/), [Kinopoisk](https://www.kinopoisk.ru/), [Letterboxd](https://letterboxd.com/) and [BetaSeries](https://betaseries.com/en/) will become free online cinemas! On each page with a movie or TV series, a flag will appear in the upper left corner. By clicking on it, you will open a player with the movie.
 
 [RUS](README.md) | **ENG**
 
