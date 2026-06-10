@@ -24,6 +24,7 @@
 // @match           *://www.betaseries.com/*/show/*
 // @match           *://www.betaseries.com/*/movie/*
 // @match           *://www.betaseries.com/*/episode/*
+// @match           *://www.betaseries.com/*/season/*
 // @match           *://www.betaseries.com/serie/*
 // @match           *://www.betaseries.com/film/*
 // @match           *://www.betaseries.com/episode/*
@@ -50,8 +51,9 @@
 	const IMDB_MATCHER = /imdb\.com\/title\/tt\.*/;
 	const TMDB_MATCHER = /themoviedb\.org\/(movie|tv)\/\.*/;
 	const LETTERBOXD_MATCHER = /letterboxd\.com\/film\/\.*/;
-	const BETASERIES_MATCHER = /betaseries\.com\/[a-z-]+\/(show|movie|episode)\/.+/;
+	const BETASERIES_MATCHER = /betaseries\.com\/[a-z-]+\/(show|movie|episode|season)\/.+/;
 	const BETASERIES_MATCHER_FR = /betaseries\.com\/(serie|film|episode)\/.+/;
+	const BETASERIES_SEASON_MATCHER = /betaseries\.com\/[a-z-]+\/season\/.+/;
 	const MATCHERS = [KINOPOISK_MATCHER, IMDB_MATCHER, TMDB_MATCHER,
 		LETTERBOXD_MATCHER, BETASERIES_MATCHER, BETASERIES_MATCHER_FR];
 
@@ -98,7 +100,7 @@
 	/**
 	 * Extract movie data from the page
 	 */
-	function extractMovieData() {
+	async function extractMovieData() {
 		const url = getCurrentURL();
 
 		// Movie title
@@ -151,6 +153,40 @@
 
 		// IMDB ID from Letterboxd or BetaSeries
 		if (url.match(LETTERBOXD_MATCHER) || url.match(BETASERIES_MATCHER) || url.match(BETASERIES_MATCHER_FR)) {
+
+			// For BetaSeries season pages, fetch IMDB/TMDB ID from the parent show page
+			if (url.match(BETASERIES_SEASON_MATCHER)) {
+				const parts = url.split('/');
+				const seasonIdx = parts.indexOf('season');
+				if (seasonIdx === -1) return null;
+				parts[seasonIdx] = 'show';
+				parts.splice(seasonIdx + 2);
+				const showUrl = parts.join('/');
+
+				try {
+					const response = await fetch(showUrl);
+					const html = await response.text();
+					const doc = new DOMParser().parseFromString(html, 'text/html');
+					const links = Array.from(doc.querySelectorAll('a'));
+
+					const imdbLink = links.find((link) => link?.href?.match(IMDB_MATCHER));
+					if (imdbLink) {
+						const imdbId = imdbLink.href.split('/').at(4);
+						if (imdbId) return { imdb: imdbId, title };
+					}
+
+					const tmdbLink = links.find((link) => link?.href?.match(TMDB_MATCHER));
+					if (tmdbLink) {
+						const tmdbId = tmdbLink.href.split('/').at(4)?.split('-')?.at(0);
+						if (tmdbId) return { tmdb: tmdbId, title };
+					}
+				} catch (error) {
+					logger.error('Failed to fetch BetaSeries show page:', error);
+				}
+
+				return null;
+			}
+
 			const elements = document.querySelectorAll('a');
 			const elementsArray = Array.from(elements);
 
@@ -276,7 +312,7 @@
 	 * @param {boolean} loadInBackground If true, page will be opened in background
 	 */
 	async function openPlayer(loadInBackground = false) {
-		const data = extractMovieData();
+		const data = await extractMovieData();
 		if (!data) return logger.error('Failed to extract movie data');
 
 		await GM.setValue('movie-data', data);
