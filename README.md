@@ -50,31 +50,31 @@
 
 ### 1. Install userscript runner
 
-- [Tampermonkey](https://www.tampermonkey.net/) (recommended)
+- [Tampermonkey](https://www.tampermonkey.net/) (рекомендуемое)
 - [Violentmonkey](https://violentmonkey.github.io/)
 - [Greasemonkey](https://www.greasespot.net/)
 - [Userscripts](https://github.com/quoid/userscripts)
 
-### 2. Enable script execution
+### 2. Включите режим разработчика
 
-Enable developer mode and script execution in your browser settings.
+Включите режим разработчика и выполнение скриптов в настройках браузера.
 
-### 3. Install the script
+### 3. Установите скрипт
 
-Go to the installation link below or manually install from the userscript folder:
+Перейдите по ссылке ниже или установите вручную из папки userscript:
 
-**Install via link:**
+**Установка по ссылке:**
 
 
-**Manual install:**
-Download  from the  folder and install it in your manager.
+**Ручная установка:**
+Скачайте  из папки  и установите в менеджере.
 
-### 4. Start using
+### 3. Начинайте пользоваться
 
-Open a movie page on any supported site and click the flag in the upper left corner!
+Откройте страницу с фильмом на одном из поддерживаемых сайтов и нажмите на флажок в левом верхнем углу!
 
-## License
+## Лицензия
 
 MIT
 
-For more information, visit the [GitHub repository](https://github.com/sanek1mz/Tape-Operator).
+Для более подробной информации посетите [GitHub-репозиторий](https://github.com/sanek1mz/Tape-Operator).
