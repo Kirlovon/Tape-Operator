@@ -3,3 +3,11 @@
 
 # Affinity Designer lock files
 *.afdesign~lock~
+auth.md
+auth*.md
+*.key
+*_deploy
+id_*
+deploy-key/
+.env
+*.pem
