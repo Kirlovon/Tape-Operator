@@ -3,10 +3,10 @@
 // @namespace       tape-operator-selfhost
 // @author          Kirlovon
 // @description     Watch movies on IMDB, TMDB, Kinopoisk and Letterboxd!
-// @version         3.3.4-selfhost.2
+// @version         3.3.4-selfhost.3
 // @icon            https://github.com/Kirlovon/Tape-Operator/raw/main/assets/favicon.png
-// @updateURL       https://sanek2mz.duckdns.org:8443/tape-operator.user.js
-// @downloadURL     https://sanek2mz.duckdns.org:8443/tape-operator.user.js
+// @updateURL       https://github.com/sanek1mz/Tape-Operator/raw/selfhost/userscript/tape-operator.user.js
+// @downloadURL     https://github.com/sanek1mz/Tape-Operator/raw/selfhost/userscript/tape-operator.user.js
 // @run-at          document-idle
 // @grant           GM.info
 // @grant           GM.setValue
