@@ -295,6 +295,6 @@
 	logger.info('Script executed');
 const PLAYER_DOMAIN = 'https://sanek2mz.duckdns.org:8443';
 const PLAYER_PATH = /player/;
-const isPlayerPage = PLAYER_DOMAIN === location.origin && PLAYER_PATH === location.pathname;
+const isPlayerPage = PLAYER_DOMAIN === location.origin && PLAYER_PATH.test(location.pathname);
 isPlayerPage ? initPlayer() : initBanner()
 })();
