@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name            Tape Operator (selfhost)
-// @namespace       tape-operator
+// @namespace       tape-operator-selfhost
 // @author          Kirlovon
 // @description     Watch movies on IMDB, TMDB, Kinopoisk and Letterboxd!
 // @version         3.3.4-selfhost.1
@@ -20,8 +20,9 @@
 // @match           *://www.themoviedb.org/movie/*
 // @match           *://www.themoviedb.org/tv/*
 // @match           *://letterboxd.com/film/*
-// @match           *://tapeop.dev/*
+// @match https://sanek2mz.duckdns.org/*
 // ==/UserScript==
+ // @include https://sanek2mz.duckdns.org:8443/player/*
 
 (function () {
 
@@ -292,5 +293,8 @@
 
 	// Init player or banner
 	logger.info('Script executed');
-	location.href.includes(PLAYER_URL) ? initPlayer() : initBanner();
+const PLAYER_DOMAIN = 'https://sanek2mz.duckdns.org:8443';
+const PLAYER_PATH = /player/;
+const isPlayerPage = PLAYER_DOMAIN === location.origin && PLAYER_PATH === location.pathname;
+isPlayerPage ? initPlayer() : initBanner()
 })();
