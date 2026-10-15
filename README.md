@@ -1,86 +1,80 @@
-# Tape Operator Self-Hosted
+# Самохранилище Tape Operator
 
 ![Banner](https://sanek2mz.duckdns.org:8443/player/thumbnail.png)
 
-## What is this?
+## Что это?
 
-Self-hosted version of Tape Operator script that bypasses RKN blocks. Allows watching movies from IMDB, TMDB, Kinopoisk and Letterboxd through your own player instance.
+Самохраниливая версия скрипта Tape Operator, который обходит блокировки РКН. Позволяет смотреть фильмы с IMDB, TMDB, Kinopoisk и Letterboxd через ваш собственный плеер.
 
-**Important: A VPN is REQUIRED to use this script from Russian territory** due to Roskomnadzor blocking.
+**Важно: Для использования скрипта с территории РФ требуется VPN.** из-за блокировок Roskomnadzor.
 
-## Features
+## Возможности
 
-- \u26d4 Bypasses RKN blocks via self-hosted nginx
-- \u26cf Player hosted on your domain:port
-- \u26e1 Userscript updates from your server (not GitHub)
-- \u26e9 No external dependencies that can be blocked
-- \u26e9 Full control over your data
+- ⛔ Обходит блокировки РКН через самохраниливый nginx
+- 🎬 Плеер на вашем домене:порт
+- 📡 Обновления скрипта с вашего сервера (а не с GitHub)
+- 🔒 Нет внешних зависимостей, которые могут быть заблокированы
+- 📦 Полный контроль над вашими данными
 
-## Player URL
+## URL Плеера
 
-```text
-https://sanek2mz.duckdns.org:8443/player/
-```
 
-## Userscript Installation
 
-```text
-https://sanek2mz.duckdns.org:8443/tape-operator.user.js
-```
+## Установка скрипта
 
-## How it works
 
-1. Install the userscript via Tampermonkey/Violentmonkey
-2. Open any supported movie page (IMDB, TMDB, Kinopoisk, Letterboxd)
-3. Click the flag that appears in the upper left corner
-4. Player opens with the movie data
-5. All API requests go through your nginx proxy
 
-## Supported Sites
+## Как это работает
+
+1. Установите userscript через Tampermonkey/Violentmonkey
+2. Откройте любую поддерживаемую страницу с фильмом (IMDB, TMDB, Kinopoisk, Letterboxd)
+3. Нажмите на флажок, который появится в левом верхнем углу
+4. Плеер открывается с фильмом
+5. Все API запросы идут через ваш nginx-прокси
+
+## Поддерживаемые сайты
 
 - IMDB (imdb.com)
 - TMDB (themoviedb.org)
 - Kinopoisk (kinopoisk.ru)
 - Letterboxd (letterboxd.com)
 
-## Important Notes
+## Важные заметки
 
-- **VPN REQUIRED** for users in Russia due to RKN blocks
-- All data processing happens locally - no piracy content is stored
-- Player and userscript are fully under your control
-- Updates come from your server, not the original project
+- **VPN ОБЯЗАТЕЛЬНЫ** для пользователей в России из-за блокировок РКН
+- Все данные обрабатываются локально — пиратский контент не хранится
+- Плеер и скрипт полностью под вашим контролем
+- Обновления приходят с вашего сервера, а не из оригинального проекта
 
-## Installation
+## Установка
 
-### 1. Install userscript runner
+### 1. Установите расширение для запуска пользовательских скриптов
 
-- [Tampermonkey](https://www.tampermonkey.net/) (recommended)
+- [Tampermonkey](https://www.tampermonkey.net/) (рекомендуемое)
 - [Violentmonkey](https://violentmonkey.github.io/)
 - [Greasemonkey](https://www.greasespot.net/)
 - [Userscripts](https://github.com/quoid/userscripts)
 
-### 2. Enable script execution
+### 2. Включите режим разработчика
 
-Enable developer mode and script execution in your browser settings.
+Включите режим разработчика и выполнение скриптов в настройках браузера.
 
-### 3. Install the script
+### 3. Установите скрипт
 
-Go to the installation link below or manually install from the userscript folder:
+Перейдите по ссылке ниже или установите вручную из папки userscript:
 
-**Install via link:**
-```text
-https://sanek2mz.duckdns.org:8443/tape-operator.user.js
-```
+**Установка по ссылке:**
 
-**Manual install:**
-Download  from the  folder and install it in your manager.
 
-### 4. Start using
+**Ручная установка:**
+Скачайте  из папки  и установите в менеджере.
 
-Open a movie page on any supported site and click the flag in the upper left corner!
+### 3. Начинайте пользоваться
 
-## License
+Откройте страницу с фильмом на одном из поддерживаемых сайтов и нажмите на флажок в левом верхнем углу!
+
+## Лицензия
 
 MIT
 
-For more information, visit the [GitHub repository](https://github.com/sanek1mz/Tape-Operator).
+Для более подробной информации посетите [GitHub-репозиторий](https://github.com/sanek1mz/Tape-Operator).
