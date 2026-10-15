@@ -1,6 +1,6 @@
 # Самохранилище Tape Operator
 
-![Banner](https://sanek2mz.duckdns.org:8443/player/thumbnail.png)
+![Banner](https://github.com/sanek1mz/Tape-Operator/raw/selfhost/assets/poster.webp)
 
 ## Что это?
 
@@ -16,65 +16,40 @@
 - 🔒 Нет внешних зависимостей, которые могут быть заблокированы
 - 📦 Полный контроль над вашими данными
 
-## Player URL
+## Установка 🎓
 
+1. Установите одно из расширений для запуска пользовательских скриптов:
 
-
-## Userscript Installation
-
-
-
-## How it works
-
-1. Install the userscript via Tampermonkey/Violentmonkey
-2. Open any supported movie page (IMDB, TMDB, Kinopoisk, Letterboxd)
-3. Click the flag that appears in the upper left corner
-4. Player opens with the movie data
-5. All API requests go through your nginx proxy
-
-## Supported Sites
-
-- IMDB (imdb.com)
-- TMDB (themoviedb.org)
-- Kinopoisk (kinopoisk.ru)
-- Letterboxd (letterboxd.com)
-
-## Important Notes
-
-- **VPN REQUIRED** for users in Russia due to RKN blocks
-- All data processing happens locally - no piracy content is stored
-- Player and userscript are fully under your control
-- Updates come from your server, not the original project
-
-## Installation
-
-### 1. Install userscript runner
-
-- [Tampermonkey](https://www.tampermonkey.net/) (рекомендуемое)
+[repeated from earlier in this conversation: - [Tampermonkey](https://www.tampermonkey.net/) _(рекомендуемое)_
 - [Violentmonkey](https://violentmonkey.github.io/)
 - [Greasemonkey](https://www.greasespot.net/)
-- [Userscripts](https://github.com/quoid/userscripts)
+- [Userscripts](https://github.com/quoid/userscripts)]
 
-### 2. Включите режим разработчика
+2. Разрешите выполнение userscript’ов и режим разработчика в вашем браузере.
 
-Включите режим разработчика и выполнение скриптов в настройках браузера.
+3. Установите скрипт, перейдя по [этой ссылке](https://sanek2mz.duckdns.org:8443/tape-operator.user.js). _(либо скачайте  из папки  и установите вручную)_
 
-### 3. Установите скрипт
+Готово, теперь откройте страницу с фильмом на одном из поддерживаемых сайтов _([пример](https://letterboxd.com/film/babylon-2022/))_ и нажмите на флажок в левом верхнем углу!
 
-Перейдите по ссылке ниже или установите вручную из папки userscript:
+> Если флажок не появляется, проверьте, установлен ли скрипт правильно, и перезапустите браузер.
 
-**Установка по ссылке:**
+<br>
 
+## Отказ от Ответственности
 
-**Ручная установка:**
-Скачайте  из папки  и установите в менеджере.
+Проект не хранит и не распространяет пиратский контент. Все права на материалы принадлежат их законным владельцам. Для удаления незаконного контента обращайтесь к первоисточнику. Я не несу ответственности за содержание, размещенное на сторонних ресурсах.
 
-### 3. Начинайте пользоваться
+**_Пиратство - плохо!_**
 
-Откройте страницу с фильмом на одном из поддерживаемых сайтов и нажмите на флажок в левом верхнем углу!
+<br>
 
 ## Лицензия
 
-MIT
+MIT _([LICENSE](https://github.com/sanek1mz/Tape-Operator/blob/selfhost/LICENSE) файл)_
 
-Для более подробной информации посетите [GitHub-репозиторий](https://github.com/sanek1mz/Tape-Operator).
+## Self-host
+
+Плеер раздаётся статикой через nginx по адресу https://sanek2mz.duckdns.org:8443/player/, путь к файлам — , пример конфига — , обновление через .
+
+---
+*Форк проекта [Kirlovon/Tape-Operator](https://github.com/Kirlovon/Tape-Operator), лицензия MIT*
