@@ -20,16 +20,16 @@
 
 1. Установите одно из расширений для запуска пользовательских скриптов:
 
-[repeated from earlier in this conversation: - [Tampermonkey](https://www.tampermonkey.net/) _(рекомендуемое)_
-- [Violentmonkey](https://violentmonkey.github.io/)
-- [Greasemonkey](https://www.greasespot.net/)
-- [Userscripts](https://github.com/quoid/userscripts)]
+   - [Tampermonkey](https://www.tampermonkey.net/) _(рекомендуемое)_
+   - [Violentmonkey](https://violentmonkey.github.io/)
+   - [Greasemonkey](https://www.greasespot.net/)
+   - [Userscripts](https://github.com/quoid/userscripts)_
 
 2. Разрешите выполнение userscript’ов и режим разработчика в вашем браузере.
 
-3. Установите скрипт, перейдя по [этой ссылке](https://sanek2mz.duckdns.org:8443/tape-operator.user.js). _(либо скачайте  из папки  и установите вручную)_
+3. Установите скрипт, перейдя по ссылке https://sanek2mz.duckdns.org:8443/tape-operator-user.js. _(либо скачайте tape-operator-user.js из папки userscript и установите вручную)_
 
-Готово, теперь откройте страницу с фильмом на одном из поддерживаемых сайтов _([пример](https://letterboxd.com/film/babylon-2022/))_ и нажмите на флажок в левом верхнем углу!
+Готово, теперь откройте страницу с фильмом на одном из поддерживаемых сайтов [пример](https://letterboxd.com/film/babylon-2022/) и нажмите на флажок в левом верхнем углу!
 
 > Если флажок не появляется, проверьте, установлен ли скрипт правильно, и перезапустите браузер.
 
@@ -37,7 +37,7 @@
 
 ## Отказ от Ответственности
 
-Проект не хранит и не распространяет пиратский контент. Все права на материалы принадлежат их законным владельцам. Для удаления незаконного контента обращайтесь к первоисточнику. Я не несу ответственности за содержание, размещенное на сторонних ресурсах.
+Проект не хранит и не распространяет пиратский контент. Все права на материалы принадлежат их законным владельцам. Для удаления незаконного контента обращайтесь к первоисточнику. Я не несу ответственность за содержание, размещенное на сторонних ресурсах.
 
 **_Пиратство - плохо!_**
 
@@ -45,11 +45,11 @@
 
 ## Лицензия
 
-MIT _([LICENSE](https://github.com/sanek1mz/Tape-Operator/blob/selfhost/LICENSE) файл)_
+MIT ([LICENSE](https://github.com/sanek1mz/Tape-Operator/blob/selfhost/LICENSE) файл)_
 
 ## Self-host
 
-Плеер раздаётся статикой через nginx по адресу https://sanek2mz.duckdns.org:8443/player/, путь к файлам — , пример конфига — , обновление через .
+Плеер раздаётся статикой через nginx по адресу https://sanek2mz.duckdns.org:8443/player/, путь к файлам — assets/, пример конфига — deploy/nginx-tape-operator.conf, обновление через update.sh.
 
 ---
 *Форк проекта [Kirlovon/Tape-Operator](https://github.com/Kirlovon/Tape-Operator), лицензия MIT*
