@@ -25,7 +25,7 @@ With this script, IMDB, TMDB, Kinopoisk and Letterboxd will become free online c
 
 Разрешите выполнение userscript’ов и режим разработчика в вашем браузере.
 
-Установите скрипт, перейдя по этой ссылке. (либо скачайте tape-operator.user.js из папки userscript и установите вручную)
+Установите скрипт, перейдя по ссылке https://sanek2mz.duckdns.org:8443/tape-operator.user.js. (либо скачайте tape-operator.user.js из папки userscript и установите вручную)
 
 Готово, теперь откройте страницу с фильмом на одном из поддерживаемых сайтов (пример) и нажмите на флажок в левом верхнем углу!
 
