@@ -16,65 +16,65 @@
 - 🔒 Нет внешних зависимостей, которые могут быть заблокированы
 - 📦 Полный контроль над вашими данными
 
-## URL Плеера
+## Player URL
 
 
 
-## Установка скрипта
+## Userscript Installation
 
 
 
-## Как это работает
+## How it works
 
-1. Установите userscript через Tampermonkey/Violentmonkey
-2. Откройте любую поддерживаемую страницу с фильмом (IMDB, TMDB, Kinopoisk, Letterboxd)
-3. Нажмите на флажок, который появится в левом верхнем углу
-4. Плеер открывается с фильмом
-5. Все API запросы идут через ваш nginx-прокси
+1. Install the userscript via Tampermonkey/Violentmonkey
+2. Open any supported movie page (IMDB, TMDB, Kinopoisk, Letterboxd)
+3. Click the flag that appears in the upper left corner
+4. Player opens with the movie data
+5. All API requests go through your nginx proxy
 
-## Поддерживаемые сайты
+## Supported Sites
 
 - IMDB (imdb.com)
 - TMDB (themoviedb.org)
 - Kinopoisk (kinopoisk.ru)
 - Letterboxd (letterboxd.com)
 
-## Важные заметки
+## Important Notes
 
-- **VPN ОБЯЗАТЕЛЬНЫ** для пользователей в России из-за блокировок РКН
-- Все данные обрабатываются локально — пиратский контент не хранится
-- Плеер и скрипт полностью под вашим контролем
-- Обновления приходят с вашего сервера, а не из оригинального проекта
+- **VPN REQUIRED** for users in Russia due to RKN blocks
+- All data processing happens locally - no piracy content is stored
+- Player and userscript are fully under your control
+- Updates come from your server, not the original project
 
-## Установка
+## Installation
 
-### 1. Установите расширение для запуска пользовательских скриптов
+### 1. Install userscript runner
 
-- [Tampermonkey](https://www.tampermonkey.net/) (рекомендуемое)
+- [Tampermonkey](https://www.tampermonkey.net/) (recommended)
 - [Violentmonkey](https://violentmonkey.github.io/)
 - [Greasemonkey](https://www.greasespot.net/)
 - [Userscripts](https://github.com/quoid/userscripts)
 
-### 2. Включите режим разработчика
+### 2. Enable script execution
 
-Включите режим разработчика и выполнение скриптов в настройках браузера.
+Enable developer mode and script execution in your browser settings.
 
-### 3. Установите скрипт
+### 3. Install the script
 
-Перейдите по ссылке ниже или установите вручную из папки userscript:
+Go to the installation link below or manually install from the userscript folder:
 
-**Установка по ссылке:**
+**Install via link:**
 
 
-**Ручная установка:**
-Скачайте  из папки  и установите в менеджере.
+**Manual install:**
+Download  from the  folder and install it in your manager.
 
-### 3. Начинайте пользоваться
+### 4. Start using
 
-Откройте страницу с фильмом на одном из поддерживаемых сайтов и нажмите на флажок в левом верхнем углу!
+Open a movie page on any supported site and click the flag in the upper left corner!
 
-## Лицензия
+## License
 
 MIT
 
-Для более подробной информации посетите [GitHub-репозиторий](https://github.com/sanek1mz/Tape-Operator).
+For more information, visit the [GitHub repository](https://github.com/sanek1mz/Tape-Operator).
