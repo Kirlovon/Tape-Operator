@@ -3,7 +3,7 @@
 // @namespace       tape-operator-selfhost
 // @author          Kirlovon
 // @description     Watch movies on IMDB, TMDB, Kinopoisk and Letterboxd!
-// @version         3.3.4-selfhost.4
+// @version         3.3.4-selfhost.5
 // @icon            https://github.com/Kirlovon/Tape-Operator/raw/main/assets/favicon.png
 // @updateURL       https://github.com/sanek1mz/Tape-Operator/raw/selfhost/userscript/tape-operator.user.js
 // @downloadURL     https://github.com/sanek1mz/Tape-Operator/raw/selfhost/userscript/tape-operator.user.js
@@ -36,6 +36,7 @@
 
 	// ID of the banner, attached to the page
 	const BANNER_ID = 'tape-operator-banner';
+	const ALT_BANNER_ID = 'tape-operator-alt-banner';
 
 	// URL Matchers
 	const KINOPOISK_MATCHER = /kinopoisk\.ru\/(film|series)\/.*/;
@@ -244,6 +245,82 @@
 		}, 300);
 
 		document.body.appendChild(banner);
+
+		attachAltBanner();
+	}
+
+	/**
+	 * Add alternative (right) banner that opens Yandex search fallback
+	 */
+	function attachAltBanner() {
+		if (document.getElementById(ALT_BANNER_ID)) return;
+
+		const banner = document.createElement('button');
+		banner.id = ALT_BANNER_ID;
+		banner.title = 'Искать на Яндексе (запасной вариант)';
+		banner.style.all = 'unset';
+		banner.style.backgroundImage = `url(${BANNER_IMAGE})`;
+		banner.style.backgroundSize = 'contain';
+		banner.style.backgroundRepeat = 'no-repeat';
+		banner.style.width = '32px';
+		banner.style.height = '128px';
+		banner.style.top = '-48px';
+		banner.style.right = '8px';
+		banner.style.opacity = '0';
+		banner.style.outline = 'none';
+		banner.style.cursor = 'pointer';
+		banner.style.position = 'fixed';
+		banner.style.zIndex = '9999999999';
+		banner.style.transition = 'opacity 0.15s ease, top 0.15s ease';
+		banner.style.transform = 'scaleX(-1)';
+		banner.style.filter = 'drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5)) hue-rotate(140deg)';
+
+		banner.addEventListener('mouseover', () => (banner.style.top = '-12px'));
+		banner.addEventListener('mouseout', () => (banner.style.top = '-24px'));
+		banner.addEventListener('click', () => openYandexSearch());
+		banner.addEventListener('mousedown', (event) => event.button === 1 && openYandexSearch());
+
+		setTimeout(() => {
+			banner.style.top = '-24px';
+			banner.style.opacity = '1';
+		}, 300);
+
+		document.body.appendChild(banner);
+	}
+
+	/**
+	 * Extract release year: from title (IMDB/TMDB) or meta description (Kinopoisk)
+	 * @returns {string} Year or empty string
+	 */
+	function extractYear() {
+		try {
+			const data = extractMovieData();
+			if (data?.title) {
+				const match = data.title.match(/\b(19|20)\d{2}\b/);
+				if (match) return match[0];
+			}
+			const desc = document.querySelector('meta[property="og:description"]')?.content || '';
+			const match = desc.match(/\b(19|20)\d{2}\b/);
+			if (match) return match[0];
+		} catch (error) {
+			return '';
+		}
+		return '';
+	}
+
+	/**
+	 * Open Yandex search for the movie as a fallback source
+	 */
+	function openYandexSearch() {
+		const data = extractMovieData();
+		if (!data || !data.title) return logger.error('Failed to extract movie data for search');
+
+		const year = extractYear();
+		const query = `Смотреть фильм ${data.title} ${year} онлайн бесплатно в HD 1080 на Лордфильм`.replace(/\s+/g, ' ').trim();
+		const url = 'https://yandex.ru/search/?text=' + encodeURIComponent(query);
+
+		logger.info('Opening Yandex search:', query);
+		GM.openInTab(url);
 	}
 
 	/**
@@ -251,6 +328,7 @@
 	 */
 	function removeBanner() {
 		document.getElementById(BANNER_ID)?.remove();
+		document.getElementById(ALT_BANNER_ID)?.remove();
 	}
 
 	/**
