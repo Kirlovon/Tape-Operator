@@ -1,57 +1,45 @@
-# Самохостинг Tape Operator
+# Tape Operator — Selfhost Edition
 
-![Banner](https://github.com/sanek1mz/Tape-Operator/raw/selfhost/assets/poster.webp)
+![Banner](assets/banner-selfhost.webp)
 
-## Что это?
+Самохостинговая версия скрипта [Tape Operator](https://github.com/Kirlovon/Tape-Operator). Плеер и API-прокси живут на вашем собственном сервере — браузер не обращается ни к tapeop.dev, ни к api.kinobox.tv напрямую, что снимает блокировки РКН на этих доменах.
 
-Самохостинговая версия скрипта Tape Operator, который обходит блокировки РКН. Позволяет смотреть фильмы с IMDB, TMDB, Kinopoisk и Letterboxd через ваш собственный плеер.
-
-**Важно: Для использования скрипта с территории РФ требуется VPN.** из-за блокировок Roskomnadzor.
+> **Важно:** для части источников видео по-прежнему может понадобиться VPN — сами iframe грузятся браузером напрямую с чужих CDN.
 
 ## Возможности
 
-- ⛔ Обходит блокировки РКН через самохостинг nginx
-- 🎬 Плеер на вашем домене:порт
-- 📡 Обновления скрипта с вашего сервера (а не с GitHub)
-- 🔒 Нет внешних зависимостей, которые могут быть заблокированы
-- 📦 Полный контроль над вашими данными
+- 🚩 Два флажка на странице фильма: красный слева — ваш плеер, синий справа — запасной вариант (поиск на Яндексе)
+- 🎬 Плеер на вашем домене и порту, статика через nginx
+- 🔀 Прокси к Kinobox API с эмуляцией браузера (TLS-имперсонация Chrome) — обходит антибот-фильтр API
+- 📡 Автообновление userscript с этого репозитория
+- 🖥️ Работает на IMDB, TMDB, Кинопоиске и Letterboxd
 
-## Установка 🎓
+## Установка
 
-1. Установите одно из расширений для запуска пользовательских скриптов:
+1. Установите расширение для userscript'ов: [Tampermonkey](https://www.tampermonkey.net/) (рекомендуется), Violentmonkey, Greasemonkey или Userscripts.
+2. [Разрешите выполнение userscript'ов и режим разработчика](https://www.tampermonkey.net/faq.php?locale=ru#Q209) в браузере.
+3. Установите скрипт: https://github.com/sanek1mz/Tape-Operator/raw/selfhost/userscript/tape-operator.user.js (либо вручную из папки `userscript/`).
 
-   - [Tampermonkey](https://www.tampermonkey.net/) _(рекомендуемое)_
-   - [Violentmonkey](https://violentmonkey.github.io/)
-   - [Greasemonkey](https://www.greasespot.net/)
-   - [Userscripts](https://github.com/quoid/userscripts)_
+Откройте страницу фильма на одном из поддерживаемых сайтов и нажмите флажок: **красный (слева)** открывает ваш плеер, **синий (справа)** — поиск фильма на Яндексе (запасной вариант, если плеер не нашёл фильм или источники не работают).
 
-2. Разрешите выполнение userscript’ов и режим разработчика в вашем браузере.
+> Флажок не появился? Проверьте, что скрипт включён в дашборде расширения, и перезапустите браузер.
 
-3. Установите скрипт, перейдя по ссылке https://github.com/sanek1mz/Tape-Operator/raw/selfhost/userscript/tape-operator.user.js. _(либо скачайте tape-operator-user.js из папки userscript и установите вручную)_
+## Самохостинг
 
-Левый флажок открывает ваш плеер, правый (синий) — запасной вариант: поиск фильма на Яндексе.
+Плеер раздаётся статикой через nginx, например: `https://sanek2mz.duckdns.org:8443/player/`.
 
-Готово, теперь откройте страницу с фильмом на одном из поддерживаемых сайтов [пример](https://letterboxd.com/film/babylon-2022/) и нажмите на флажок в левом верхнем углу!
+- Конфиг nginx: [deploy/nginx-tape-operator.conf](deploy/nginx-tape-operator.conf)
+- Прокси API: [deploy/kinobox_proxy.py](deploy/kinobox_proxy.py) + systemd-юнит [deploy/kinobox-proxy.service](deploy/kinobox-proxy.service)
+- Обновление на сервере: `deploy/update.sh`
 
-> Если флажок не появляется, проверьте, установлен ли скрипт правильно, и перезапустите браузер.
+Подробности устройства и развёртывания — в [deploy/](deploy/).
 
-<br>
+## Отказ от ответственности
 
-## Отказ от Ответственности
+Проект не хранит и не распространяет пиратский контент. Все права на материалы принадлежат их законным владельцам; для удаления незаконного контента обращайтесь к первоисточнику. Автор не несёт ответственности за содержание сторонних ресурсов.
 
-Проект не хранит и не распространяет пиратский контент. Все права на материалы принадлежат их законным владельцам. Для удаления незаконного контента обращайтесь к первоисточнику. Я не несу ответственность за содержание, размещенное на сторонних ресурсах.
-
-**_Пиратство - плохо!_**
-
-<br>
+**Пиратство — плохо.**
 
 ## Лицензия
 
-MIT ([LICENSE](https://github.com/sanek1mz/Tape-Operator/blob/selfhost/LICENSE) файл)_
-
-## Self-host
-
-Плеер раздаётся статикой через nginx по адресу https://sanek2mz.duckdns.org:8443/player/, путь к файлам — assets/, пример конфига — deploy/nginx-tape-operator.conf, обновление через update.sh.
-
----
-*Форк проекта [Kirlovon/Tape-Operator](https://github.com/Kirlovon/Tape-Operator), лицензия MIT*
+MIT, см. [LICENSE](LICENSE). Форк проекта [Kirlovon/Tape-Operator](https://github.com/Kirlovon/Tape-Operator).
