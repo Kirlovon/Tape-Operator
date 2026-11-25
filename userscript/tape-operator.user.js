@@ -3,7 +3,7 @@
 // @namespace       tape-operator
 // @author          Kirlovon
 // @description     Watch movies on IMDB, TMDB, Kinopoisk, Letterboxd and Kinorium!
-// @version         3.4.0
+// @version         3.4.1
 // @icon            https://github.com/Kirlovon/Tape-Operator/raw/main/assets/favicon.png
 // @updateURL       https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js
 // @downloadURL     https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js
@@ -27,7 +27,7 @@
 // @connect         www.wikidata.org
 // ==/UserScript==
 
-(function () {
+(() => {
 
 	// Current version of the script
 	const VERSION = GM.info?.script?.version;
@@ -57,6 +57,9 @@
 	}
 
 	let previousUrl = '/';
+
+	// Banner loading state, while movie data extraction is in progress
+	let isLoading = false;
 
 	/**
 	 * Initialize banner on the page
@@ -248,7 +251,7 @@
 			}
 
 			return title;
-		} catch (error) {
+		} catch (_error) {
 			return null;
 		}
 	}
@@ -278,8 +281,8 @@
 		banner.style.filter = 'drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.5))';
 
 		// Events
-		banner.addEventListener('mouseover', () => (banner.style.top = '-12px'));
-		banner.addEventListener('mouseout', () => (banner.style.top = '-24px'));
+		banner.addEventListener('mouseover', () => !isLoading && (banner.style.top = '-12px'));
+		banner.addEventListener('mouseout', () => !isLoading && (banner.style.top = '-24px'));
 		banner.addEventListener('click', () => openPlayer());
 		banner.addEventListener('mousedown', (event) => event.button === 1 && openPlayer(true));
 
@@ -303,13 +306,40 @@
 	 * @param {boolean} loadInBackground If true, page will be opened in background
 	 */
 	async function openPlayer(loadInBackground = false) {
-		const data = await extractMovieData();
-		if (!data) return logger.error('Failed to extract movie data');
+		// Prevent multiple simultaneous extractions
+		if (isLoading) return;
 
-		await GM.setValue('movie-data', data);
+		setBannerLoading(true);
 
-		logger.info('Opening player for movie', data);
-		GM.openInTab(PLAYER_URL, loadInBackground);
+		try {
+			const data = await extractMovieData();
+			if (!data) return logger.error('Failed to extract movie data');
+
+			await GM.setValue('movie-data', data);
+
+			logger.info('Opening player for movie', data);
+			GM.openInTab(PLAYER_URL, loadInBackground);
+		} finally {
+			setBannerLoading(false);
+		}
+	}
+
+	/**
+	 * Toggle banner loading state
+	 * @param {boolean} loading If true, banner will be displayed in loading state
+	 */
+	function setBannerLoading(loading) {
+		isLoading = loading;
+
+		const banner = document.getElementById(BANNER_ID);
+		if (!banner) return;
+
+		banner.style.cursor = loading ? 'progress' : 'pointer';
+		banner.setAttribute('aria-busy', String(loading));
+		banner.style.opacity = loading ? '0.5' : '1';
+
+		if (loading) banner.style.top = '-12px';
+		else banner.style.top = banner.matches(':hover') ? '-12px' : '-24px';
 	}
 
 	/**
