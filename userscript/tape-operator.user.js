@@ -109,7 +109,7 @@
 			if (url.includes('hd.kinopoisk.ru')) {
 				try {
 					const element = document.getElementById('__NEXT_DATA__');
-					const jsonData = JSON.parse(element.innerText);
+					const jsonData = JSON.parse(element.textContent);
 					const apolloState = Object.values(jsonData?.props?.pageProps?.apolloState?.data || {});
 
 					const id = apolloState.find((item) => item?.__typename === 'TvSeries' || item?.__typename === 'Film')?.id;

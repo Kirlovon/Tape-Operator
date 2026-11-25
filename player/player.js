@@ -143,7 +143,7 @@ function setSources(sourcesData) {
 	sourcesData.forEach((source, index) => {
 		const sourceElement = document.createElement('button');
 		sourceElement.className = 'source';
-		sourceElement.innerText = source?.type;
+		sourceElement.textContent = source?.type;
 
 		if (index === preferredSourceIndex) {
 			sourceElement.classList.add('selected');
@@ -270,7 +270,7 @@ function showScriptErrorMessage() {
  */
 function showScriptOutdatedMessage(scriptVersion) {
 	const template = document.getElementById('script-outdated-message').content.cloneNode(true);
-	template.querySelector('.script-version').innerText = scriptVersion;
+	template.querySelector('.script-version').textContent = scriptVersion;
 	containerElement.appendChild(template);
 }
 
@@ -490,7 +490,7 @@ function setup() {
 }
 
 // Display player version
-versionElement.innerHTML = `v${REQUIRED_VERSION}`;
+versionElement.textContent = `v${REQUIRED_VERSION}`;
 
 // Reveal body
 document.body.classList.add('visible');
