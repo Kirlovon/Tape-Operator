@@ -2,8 +2,8 @@
 // @name            Tape Operator
 // @namespace       tape-operator
 // @author          Kirlovon
-// @description     Watch movies on IMDB, TMDB, Kinopoisk and Letterboxd!
-// @version         3.3.4
+// @description     Watch movies on IMDB, TMDB, Kinopoisk, Letterboxd and Kinorium!
+// @version         3.4.0
 // @icon            https://github.com/Kirlovon/Tape-Operator/raw/main/assets/favicon.png
 // @updateURL       https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js
 // @downloadURL     https://github.com/Kirlovon/Tape-Operator/raw/main/userscript/tape-operator.user.js
@@ -14,13 +14,17 @@
 // @grant           GM.openInTab
 // @grant           GM.deleteValue
 // @grant           GM_getResourceURL
+// @grant           GM.xmlHttpRequest
 // @match           *://www.kinopoisk.ru/*
 // @match           *://hd.kinopoisk.ru/*
 // @match           *://*.imdb.com/title/*
 // @match           *://www.themoviedb.org/movie/*
 // @match           *://www.themoviedb.org/tv/*
 // @match           *://letterboxd.com/film/*
+// @match           *://kinorium.com/*
+// @match           *://*.kinorium.com/*
 // @match           *://tapeop.dev/*
+// @connect         www.wikidata.org
 // ==/UserScript==
 
 (function () {
@@ -42,7 +46,8 @@
 	const IMDB_MATCHER = /imdb\.com\/title\/tt\.*/;
 	const TMDB_MATCHER = /themoviedb\.org\/(movie|tv)\/\.*/;
 	const LETTERBOXD_MATCHER = /letterboxd\.com\/film\/\.*/;
-	const MATCHERS = [KINOPOISK_MATCHER, IMDB_MATCHER, TMDB_MATCHER, LETTERBOXD_MATCHER];
+	const KINORIUM_MATCHER = /kinorium\.com\/\d+\//;
+	const MATCHERS = [KINOPOISK_MATCHER, IMDB_MATCHER, TMDB_MATCHER, LETTERBOXD_MATCHER, KINORIUM_MATCHER];
 
 	// Logging utility
 	const logger = {
@@ -87,7 +92,7 @@
 	/**
 	 * Extract movie data from the page
 	 */
-	function extractMovieData() {
+	async function extractMovieData() {
 		const url = getCurrentURL();
 
 		// Movie title
@@ -160,7 +165,47 @@
 			return null;
 		}
 
+		// Kinopoisk or IMDB ID from Wikidata, found via Kinorium "sites" page
+		if (url.match(KINORIUM_MATCHER)) {
+			const ids = await fetchKinoriumIds(url.split('/').at(3));
+			return { ...ids, title };
+		}
+
 		return null;
+	}
+
+	/**
+	 * Fetch Kinopoisk and IMDB IDs from Wikidata, using Wikipedia links from
+	 * the Kinorium "sites" page
+	 * @param {string} movieId Kinorium movie ID
+	 * @returns {Promise<{ kinopoisk?: string, imdb?: string }>} Found IDs
+	 */
+	async function fetchKinoriumIds(movieId) {
+		try {
+			const html = await fetch(`/${movieId}/sites/`)
+				.then((response) => response.text());
+
+			const wikipediaLinks =
+				html.matchAll(/(\w+)\.wikipedia\.org\/wiki\/([^"'<>\s?#]+)/g);
+
+			for (const [, language, title] of wikipediaLinks) {
+				const url = `https://www.wikidata.org/w/api.php?action=wbgetentities&props=claims&format=json&sites=${language}wiki&titles=${title}`;
+				const response = await GM.xmlHttpRequest({ method: 'GET', url });
+				const claims = Object.values(
+					JSON.parse(response.responseText).entities || {}
+				)[0]?.claims;
+
+				// P2603 - Kinopoisk ID, P345 - IMDB ID
+				const kinopoisk = claims?.P2603?.[0]?.mainsnak?.datavalue?.value;
+				const imdb = claims?.P345?.[0]?.mainsnak?.datavalue?.value;
+				if (kinopoisk) return { kinopoisk };
+				if (imdb) return { imdb };
+			}
+		} catch (error) {
+			logger.error('Failed to fetch IDs from Wikidata:', error);
+		}
+
+		return {};
 	}
 
 	/**
@@ -258,7 +303,7 @@
 	 * @param {boolean} loadInBackground If true, page will be opened in background
 	 */
 	async function openPlayer(loadInBackground = false) {
-		const data = extractMovieData();
+		const data = await extractMovieData();
 		if (!data) return logger.error('Failed to extract movie data');
 
 		await GM.setValue('movie-data', data);
